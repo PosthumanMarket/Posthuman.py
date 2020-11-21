@@ -20,7 +20,7 @@ class BFactory:
         print("BPool.newSPool(). Begin.")
         controller_address = from_wallet.address
         func = self.contract.functions.newBPool(controller_address)
-        gaslimit = bconstants.GASLIMIT_SFACTORY_NEWSPOOL
+        gaslimit = bconstants.GASLIMIT_BFACTORY_NEWBPOOL
         (_, tx_receipt) = util.buildAndSendTx(func, from_wallet, gaslimit)
 
         # grab pool_address

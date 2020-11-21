@@ -445,7 +445,7 @@ def _createPoolWith2Tokens(network: str,
 
 def _deployBPool(network: str, from_wallet: Wallet) -> SPool:
     web3 = from_wallet.web3
-    factory_address = util.confFileValue(network, 'SFACTORY_ADDRESS')
+    factory_address = util.confFileValue(network, 'BFACTORY_ADDRESS')
     factory = BFactory(web3, factory_address)
     pool_address = factory.newBPool(from_wallet=from_wallet)
     pool = BPool(web3, pool_address)
@@ -453,4 +453,4 @@ def _deployBPool(network: str, from_wallet: Wallet) -> SPool:
 
 
 def _bfactory_address(network: str) -> str:
-    return util.confFileValue(network, 'SFACTORY_ADDRESS')
+    return util.confFileValue(network, 'BFACTORY_ADDRESS')

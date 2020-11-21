@@ -130,7 +130,7 @@ def _dtfactory_address():
     return util.confFileValue(_NETWORK, 'DTFACTORY_ADDRESS')
 
 def _bfactory_address():
-    return util.confFileValue(_NETWORK, 'SFACTORY_ADDRESS')
+    return util.confFileValue(_NETWORK, 'BFACTORY_ADDRESS')
 
 def _OCEAN_address():
     return util.confFileValue(_NETWORK, 'OCEAN_ADDRESS')

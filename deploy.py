@@ -127,7 +127,7 @@ def deploy(network):
 
     s = f"""****Things to update in ~/ocean.conf****"
 DTFACTORY_ADDRESS = {dtfactory.address}
-SFACTORY_ADDRESS = {bfactory.address}"""
+BFACTORY_ADDRESS = {bfactory.address}"""
     if network == "ganache":
         s += f"""
 OCEAN_ADDRESS = {OCEAN_token.address}"""

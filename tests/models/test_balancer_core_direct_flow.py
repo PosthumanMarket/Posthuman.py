@@ -12,7 +12,7 @@ def test1(network, OCEAN_address,
           alice_wallet, alice_ocean, alice_address,
           bob_wallet):
     web3 = alice_wallet.web3
-    bfactory_address = util.confFileValue(network, 'SFACTORY_ADDRESS')
+    bfactory_address = util.confFileValue(network, 'BFACTORY_ADDRESS')
         
     #===============================================================
     # 1. Alice publishes a dataset (= publishes a datatoken)
