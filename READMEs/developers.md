@@ -45,16 +45,6 @@ Troubleshooting ideas:
 - More ideas at [brownie-instrs](https://github.com/trentmc/brownie-instrs) 
 
 ----
-Try out a basic unit test that doesn't rely on other services:
-```console
-pytest tests/bpool/test_btoken.py
-```
-
-Troubleshooting ideas:
-- `python -m pip install eth-brownie` (without sudo)
-- More ideas at [brownie-instrs](https://github.com/trentmc/brownie-instrs) 
-
-----
 If you don't have an Infura account and you aim to deploy to `rinkeby` or `mainnet`, go to www.infura.io and sign up.
 
 Private keys etc can't live on GitHub. To handle this, ocean-lib-py tools read ~/ocean.conf. (It does *not* use environmental variables.) Start with the pre-set template:
