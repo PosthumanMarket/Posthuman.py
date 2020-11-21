@@ -27,16 +27,24 @@ source venv/bin/activate
 ```
 
 Install modules in the env't. Notably, it installs [Brownie](https://eth-brownie.readthedocs.io). Brownie helps in compiling, deploying, testing, and debugging. Brownie is not needed for *using* ocean-lib-py.
-```
+```console
 pip install -r requirements_dev.txt 
 ```
 
-Test that the python version plays well with brownie. The following should not fail. If it does, [brownie-instrs](https://github.com/trentmc/brownie-instrs) may help. And other jiggling;)
-```
+----
+Test that the python version plays well with brownie and other dev requirements. The following should not fail. 
+```console
 python
 > import brownie
+> import twine
 ```
 
+Troubleshooting ideas:
+- `pip install -e .[dev]`
+- `python -m pip install ocean_utils` (without sudo)
+- More ideas at [brownie-instrs](https://github.com/trentmc/brownie-instrs) 
+
+----
 If you don't have an Infura account and you aim to deploy to `rinkeby` or `mainnet`, go to www.infura.io and sign up.
 
 Private keys etc can't live on GitHub. To handle this, ocean-lib-py tools read ~/ocean.conf. (It does *not* use environmental variables.) Start with the pre-set template:
