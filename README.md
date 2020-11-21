@@ -1,5 +1,5 @@
 
-# ocean-lib0
+# ocean-lib
 
 `ocean-lib` is a Python library to privately & securely publish, exchange, 
 and consume data. With it, you can:
