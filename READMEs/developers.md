@@ -72,9 +72,9 @@ Run the ganache script. It adds `ganache` as a network to brownie (if needed), t
 ## 3. Copy & compile contracts
 
 Outcomes: 
-- a freshly-created `oceanbrownie/` project directory. 
-- `.sol` files from other repos in `oceanbrownie/contracts/` with imports tweaked as needed.
-- `.abi` files, compiled from the `.sol` with brownie
+- `./` is now a brownie project due to invokation of `brownie init`, and gets these new dirs: `build`, `contracts`, `interfaces`, `reports`, and `scripts`.  
+- `.sol` files from other repos in the new `contracts` directory, with imports tweaked as needed.
+- `.abi` files, compiled from the `.sol` with brownie in the new `interfaces` directory
 - ready for easy debugging via `brownie console`
 
 Let's do it! 
