@@ -1,11 +1,11 @@
-import enforce
+
 import warnings
 
 from ocean_lib.models.datatoken import DataToken
 from ocean_lib.ocean import util
 from ocean_lib.web3_internal.wallet import Wallet
 
-@enforce.runtime_validation
+
 class DTFactory:
     def __init__(self, web3, contract_address: str):
         self.web3 = web3

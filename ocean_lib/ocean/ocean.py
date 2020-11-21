@@ -2,7 +2,7 @@
 #  Copyright 2018 Ocean Protocol Foundation
 #  SPDX-License-Identifier: Apache-2.0
 
-import enforce
+
 import eth_account
 import logging
 import os
@@ -100,7 +100,7 @@ class Ocean:
     def OCEAN_address(self):
         return self.config.OCEAN_address
 
-    @enforce.runtime_validation
+    
     def create_data_token(self, blob:str, from_wallet: Wallet) -> DataToken:
         dtfactory = DTFactory(self._web3, self._config.dtfactory_address)
         DT_address = dtfactory.createToken(blob, from_wallet=from_wallet)
@@ -108,11 +108,11 @@ class Ocean:
         assert DT.address == DT_address        
         return DT
 
-    @enforce.runtime_validation
+    
     def get_data_token(self, token_address: str) -> DataToken:
         return DataToken(self._web3, token_address)
 
-    @enforce.runtime_validation
+    
     def create_pool(self,
                     DT_address: str,
                     num_DT_base: int,
@@ -143,14 +143,14 @@ class Ocean:
 
         return pool
 
-    @enforce.runtime_validation
+    
     def get_pool(self, pool_address: str) -> SPool:
         return SPool(self._web3, pool_address)
 
     #============================================================
     #to simplify balancer flows. These methods are here because
     # SPool doesn't know (and shouldn't know) OCEAN_address and _DT_address
-    @enforce.runtime_validation     
+         
     def addLiquidity(self, pool_address: str,
                      num_DT_base: int, num_OCEAN_base: int,
                      from_wallet: Wallet):
@@ -160,7 +160,7 @@ class Ocean:
         self._addLiquidity(pool_address, self.OCEAN_address, num_OCEAN_base,
                            bconstants.INIT_WEIGHT_OCEAN, from_wallet)
 
-    @enforce.runtime_validation
+    
     def _addLiquidity(self, pool_address: str, token_address: str,
                       num_add_base: int, weight_base: int, from_wallet: Wallet):
         assert num_add_base >= 0
@@ -177,7 +177,7 @@ class Ocean:
         num_after_base = num_before_base + num_add_base
         pool.rebind(token_address, num_after_base, weight_base, from_wallet)
 
-    @enforce.runtime_validation
+    
     def remove_liquidity(self, pool_address: str,
                         num_DT_base:int, num_OCEAN_base:int,
                         from_wallet: Wallet):
@@ -187,7 +187,7 @@ class Ocean:
         self._remove_liquidity(pool_address, self.OCEAN_address, num_OCEAN_base,
                                bconstants.INIT_WEIGHT_OCEAN, from_wallet)
 
-    @enforce.runtime_validation
+    
     def _remove_liquidity(self, pool_address: str,
                           token_address: str, num_remove_base: int,
                           weight_base: int, from_wallet: Wallet):
@@ -202,7 +202,7 @@ class Ocean:
         pool = SPool(self._web3, pool_address)
         pool.rebind(token_address, num_after_base, weight_base, from_wallet)
 
-    @enforce.runtime_validation
+    
     def buy_data_tokens(self, pool_address: str,
                         num_DT_base:int, max_num_OCEAN_base:int,
                         from_wallet: Wallet):
@@ -225,7 +225,7 @@ class Ocean:
             from_wallet = from_wallet,
         )
 
-    @enforce.runtime_validation
+    
     def sell_data_tokens(self, pool_address: str,
                        num_DT_base: int, min_num_OCEAN_base: int,
                        from_wallet: Wallet):
@@ -248,7 +248,7 @@ class Ocean:
             from_wallet = from_wallet,
         )
 
-    @enforce.runtime_validation
+    
     def get_DT_price_base(self, pool_address: str) -> int:
         DT_address = self._DT_address(pool_address)
         pool = SPool(self._web3, pool_address)
@@ -256,7 +256,7 @@ class Ocean:
             tokenIn_address = self.OCEAN_address,
             tokenOut_address = DT_address)
 
-    @enforce.runtime_validation
+    
     def add_liquidity_finalized(
             self, pool_address: str, num_BPT_base: int, max_num_DT_base: int,
             max_num_OCEAN_base: int, from_wallet: Wallet):
@@ -274,14 +274,14 @@ class Ocean:
         pool.joinPool(num_BPT_base, [max_num_DT_base, max_num_OCEAN_base],
                       from_wallet=from_wallet)
         
-    @enforce.runtime_validation
+    
     def _DT_address(self, pool_address: str) -> str:
         """Returns the address of this pool's datatoken."""
         assert self._is_valid_DT_OCEAN_pool(pool_address)
         pool = SPool(self._web3, pool_address)
         return pool.getCurrentTokens()[0]
 
-    @enforce.runtime_validation
+    
     def _is_valid_DT_OCEAN_pool(self, pool_address) -> bool:
         pool = SPool(self._web3, pool_address)
         if pool.getNumTokens() != 2:

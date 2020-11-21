@@ -1,11 +1,11 @@
-import enforce
+
 import warnings
 
 from . import bconstants
 from ocean_lib.ocean import util
 from ocean_lib.web3_internal.wallet import Wallet
     
-@enforce.runtime_validation
+
 class SFactory:    
     def __init__(self, web3, contract_address: str):
         abi = self._abi()

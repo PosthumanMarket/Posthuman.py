@@ -1,5 +1,5 @@
 import brownie
-import enforce
+
 import pytest
 import sys
 
@@ -275,7 +275,7 @@ def test_spot_price(network, T1, T2, alice_wallet):
     assert p_sans == 0.1
     assert round(p,8) == 0.1000001
 
-@enforce.runtime_validation
+
 def _spotPrices(network: str,
                 T1: BToken, T2: BToken,
                 wallet: Wallet, 
@@ -427,7 +427,7 @@ def test_calcPoolInGivenSingleOut_base(network, alice_wallet):
             swapFee_base = 0)
     assert round(fromBase18(x),3) == 0.005
 
-@enforce.runtime_validation
+
 def _createPoolWith2Tokens(network: str,
                            T1: BToken, T2: BToken,
                            wallet: Wallet, 
@@ -442,7 +442,7 @@ def _createPoolWith2Tokens(network: str,
 
     return pool
 
-@enforce.runtime_validation
+
 def _deploySPool(network: str, from_wallet: Wallet) -> SPool:
     web3 = from_wallet.web3
     factory_address = util.confFileValue(network, 'SFACTORY_ADDRESS')
@@ -451,6 +451,6 @@ def _deploySPool(network: str, from_wallet: Wallet) -> SPool:
     pool = SPool(web3, pool_address)
     return pool
 
-@enforce.runtime_validation
+
 def _sfactory_address(network: str) -> str:
     return util.confFileValue(network, 'SFACTORY_ADDRESS')

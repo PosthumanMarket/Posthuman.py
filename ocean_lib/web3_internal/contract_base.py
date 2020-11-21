@@ -1,7 +1,7 @@
 """All contracts inherit from this base class"""
 #  Copyright 2018 Ocean Protocol Foundation
 #  SPDX-License-Identifier: Apache-2.0
-import enforce
+
 import logging
 import typing
 
@@ -18,7 +18,7 @@ class ContractBase(object):
     """Base class for all contract objects."""
     CONTRACT_NAME = None
 
-    @enforce.runtime_validation
+    
     def __init__(self, address: str):
         name = self.contract_name
         assert name, 'contract_name property needs to be implemented in subclasses.'
@@ -78,7 +78,7 @@ class ContractBase(object):
         receipt = self.get_tx_receipt(tx_hash)
         return bool(receipt and receipt.status == 1)
 
-    @enforce.runtime_validation
+    
     def subscribe_to_event(self, event_name: str, timeout, event_filter, callback=None,
                            timeout_callback=None, args=None, wait=False,
                            from_block='latest', to_block='latest'):
@@ -111,7 +111,7 @@ class ContractBase(object):
             blocking=wait
         )
 
-    @enforce.runtime_validation
+    
     def send_transaction(self, fn_name: str, fn_args, transact=None):
         """Calls a smart contract function using either `personal_sendTransaction` (if
         passphrase is available) or `ether_sendTransaction`.
@@ -128,7 +128,7 @@ class ContractBase(object):
         transact.update({'gas': 500000})
         return contract_function.transact(transact).hex()
 
-    @enforce.runtime_validation
+    
     def get_event_argument_names(self, event_name:str):
         event = getattr(self.contract.events, event_name, None)
         if event:

@@ -1,4 +1,4 @@
-import enforce
+
 import os
 
 from ocean_lib.data_provider.data_service_provider import DataServiceProvider
@@ -7,7 +7,7 @@ from ocean_lib.ocean import util
 from ocean_lib.web3_internal.wallet import Wallet
 from ocean_utils.http_requests.requests_session import get_requests_session
 
-@enforce.runtime_validation
+
 class DataToken(BToken):
     
     def _abi(self):

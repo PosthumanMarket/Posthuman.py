@@ -3,7 +3,7 @@
 #  SPDX-License-Identifier: Apache-2.0
 
 import copy
-import enforce
+
 import logging
 import os
 
@@ -49,7 +49,7 @@ class OceanAssets(AssetServiceMixin):
     def _get_aquarius(self, url=None):
         return AquariusProvider.get_aquarius(url or self._aquarius_url)
 
-    @enforce.runtime_validation
+    
     def _process_service_descriptors(
             self, service_descriptors, metadata, account: Account):
         ddo_service_endpoint = self._get_aquarius().get_service_endpoint()
@@ -86,7 +86,7 @@ class OceanAssets(AssetServiceMixin):
         _service_descriptors.extend(service_type_to_descriptor.values())
         return ServiceFactory.build_services(_service_descriptors)
 
-    @enforce.runtime_validation
+    
     def create(self, metadata, publisher_wallet: Wallet,
                service_descriptors=None,
                owner_address=None, data_token_address=None):
@@ -230,7 +230,7 @@ class OceanAssets(AssetServiceMixin):
             return None
         return asset
 
-    @enforce.runtime_validation
+    
     def retire(self, did: str) -> bool:
         """
         Retire this did of Aquarius
@@ -247,7 +247,7 @@ class OceanAssets(AssetServiceMixin):
             logger.error(err)
             return False
 
-    @enforce.runtime_validation
+    
     def resolve(self, did: str):
         """
         When you pass a did retrieve the ddo associated.
@@ -257,7 +257,7 @@ class OceanAssets(AssetServiceMixin):
         """
         return resolve_asset(did, metadata_store_url=self._config.aquarius_url)
 
-    @enforce.runtime_validation
+    
     def search(self, text: str, sort=None, offset=100, page=1, aquarius_url=None):
         """
         Search an asset in oceanDB using aquarius.
@@ -275,7 +275,7 @@ class OceanAssets(AssetServiceMixin):
         return [Asset(dictionary=ddo_dict) for ddo_dict in
                 self._get_aquarius(aquarius_url).text_search(text, sort, offset, page)['results']]
 
-    @enforce.runtime_validation
+    
     def query(self, query: dict, sort=None, offset=100, page=1, aquarius_url=None):
         """
         Search an asset in oceanDB using search query.
@@ -294,7 +294,7 @@ class OceanAssets(AssetServiceMixin):
         return [Asset(dictionary=ddo_dict) for ddo_dict in
                 aquarius.query_search(query, sort, offset, page)['results']]
 
-    @enforce.runtime_validation
+    
     def download(self, did: str, service_index: str, consumer_account: Account,
                  destination: str, index=None) -> str:
         """
@@ -332,7 +332,7 @@ class OceanAssets(AssetServiceMixin):
             index
         )
 
-    @enforce.runtime_validation
+    
     def validate(self, metadata: dict) -> bool:
         """
         Validate that the metadata is ok to be stored in aquarius.
@@ -342,7 +342,7 @@ class OceanAssets(AssetServiceMixin):
         """
         return self._get_aquarius(self._aquarius_url).validate_metadata(metadata)
 
-    @enforce.runtime_validation
+    
     def owner(self, did: str) -> str:
         """
         Return the owner of the asset.
@@ -353,7 +353,7 @@ class OceanAssets(AssetServiceMixin):
         asset = self.resolve(did)
         return asset.publisher
 
-    @enforce.runtime_validation
+    
     def owner_assets(self, owner_address: str):
         """
         List of Asset objects published by ownerAddress
@@ -375,7 +375,7 @@ class OceanAssets(AssetServiceMixin):
             }
         }
 
-    @enforce.runtime_validation
+    
     def _build_compute_service(self, metadata, address: str) -> dict:
         return {
             "main": {

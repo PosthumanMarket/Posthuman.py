@@ -1,6 +1,6 @@
 import brownie
 import configparser
-import enforce
+
 import eth_account
 import json
 import os
@@ -58,20 +58,20 @@ def get_web3_provider(network_url):
 
     return provider
 
-@enforce.runtime_validation
+
 def toBase18(amt: float) -> int:
     return toBase(amt, 18)
 
-@enforce.runtime_validation
+
 def toBase(amt: float, dec: int) -> int:
     """returns value in e.g. wei (taking e.g. ETH as input)"""
     return int(amt * 1*10**dec)
        
-@enforce.runtime_validation
+
 def fromBase18(num_base: int) -> float:
     return fromBase(num_base, 18)
 
-@enforce.runtime_validation
+
 def fromBase(num_base: int, dec: int) -> float:
     """returns value in e.g. ETH (taking e.g. wei as input)"""
     return float(num_base / (10**dec))
@@ -82,7 +82,7 @@ def brownie_account(private_key):
 
 #FIXME: maybe deprecate this
 CONF_FILE_PATH = '~/ocean.conf'
-@enforce.runtime_validation
+
 def confFileValue(network: str, key: str) -> str:
     conf = configparser.ConfigParser()
     path = os.path.expanduser(CONF_FILE_PATH)
@@ -91,7 +91,7 @@ def confFileValue(network: str, key: str) -> str:
 
 #FIXME: maybe deprecate this
 # (or deprecate the similar but more complex version in contract_handler)
-@enforce.runtime_validation
+
 def abi(filename: str):
     with open(filename, 'r') as f:
         return json.loads(f.read())
@@ -99,7 +99,7 @@ def abi(filename: str):
 #FIXME: maybe deprecate this
 # (or deprecate the similar functionality in ocean_lib/web3_internal/contract_base.py?)
 GASLIMIT_DEFAULT = 5000000 #FIXME: put in better place
-@enforce.runtime_validation
+
 def buildAndSendTx(function,
                    from_wallet: Wallet,
                    gaslimit: int = GASLIMIT_DEFAULT,
