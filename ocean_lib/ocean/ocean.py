@@ -21,8 +21,8 @@ from ocean_lib.models import bconstants
 from ocean_lib.models.btoken import BToken
 from ocean_lib.models.datatoken import DataToken
 from ocean_lib.models.dtfactory import DTFactory
-from ocean_lib.models.sfactory import SFactory
-from ocean_lib.models.spool import SPool
+from ocean_lib.models.bfactory import BFactory
+from ocean_lib.models.bpool import BPool
 from ocean_lib.ocean.ocean_assets import OceanAssets
 from ocean_lib.ocean.ocean_auth import OceanAuth
 from ocean_lib.ocean.ocean_compute import OceanCompute
@@ -55,7 +55,7 @@ class Ocean:
                 'eth-network': {
                     'network': config.get('network',''),
                     'dtfactory.address': config.get('dtfactory.address',''),
-                    'sfactory.address': config.get('sfactory.address',''),
+                    'bfactory.address': config.get('sfactory.address',''),
                     'OCEAN.address': config.get('OCEAN.address',''),
                 },
                 'resources': {
@@ -117,13 +117,13 @@ class Ocean:
                     DT_address: str,
                     num_DT_base: int,
                     num_OCEAN_base:int,
-                    from_wallet: Wallet) -> SPool:
-        sfactory_address = self._config.sfactory_address
+                    from_wallet: Wallet) -> BPool:
+        bfactory_address = self._config.sfactory_address
         
-        sfactory = SFactory(self._web3, sfactory_address)
+        bfactory = BFactory(self._web3, sfactory_address)
 
-        pool_address = sfactory.newSPool(from_wallet)
-        pool = SPool(self._web3, pool_address)
+        pool_address = bfactory.newBPool(from_wallet)
+        pool = BPool(self._web3, pool_address)
         pool.setPublicSwap(True, from_wallet=from_wallet)
         pool.setSwapFee(bconstants.DEFAULT_SWAP_FEE, from_wallet) 
 
@@ -144,12 +144,12 @@ class Ocean:
         return pool
 
     
-    def get_pool(self, pool_address: str) -> SPool:
-        return SPool(self._web3, pool_address)
+    def get_pool(self, pool_address: str) -> BPool:
+        return BPool(self._web3, pool_address)
 
     #============================================================
     #to simplify balancer flows. These methods are here because
-    # SPool doesn't know (and shouldn't know) OCEAN_address and _DT_address
+    # BPool doesn't know (and shouldn't know) OCEAN_address and _DT_address
          
     def addLiquidity(self, pool_address: str,
                      num_DT_base: int, num_OCEAN_base: int,
@@ -172,7 +172,7 @@ class Ocean:
         
         token.approve(pool_address, num_add_base, from_wallet)
 
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         num_before_base = token.balanceOf_base(pool_address)
         num_after_base = num_before_base + num_add_base
         pool.rebind(token_address, num_after_base, weight_base, from_wallet)
@@ -199,7 +199,7 @@ class Ocean:
         num_after_base = num_before_base - num_remove_base
         assert num_after_base >= 0, "tried to remove too much"
         
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         pool.rebind(token_address, num_after_base, weight_base, from_wallet)
 
     
@@ -215,7 +215,7 @@ class Ocean:
         OCEAN.approve(pool_address, max_num_OCEAN_base, from_wallet)
         
         DT_address = self._DT_address(pool_address)
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         pool.swapExactAmountOut(
             tokenIn_address = self.OCEAN_address, #entering pool
             maxAmountIn_base = max_num_OCEAN_base, #""
@@ -238,7 +238,7 @@ class Ocean:
         DT = BToken(self._web3, DT_address)
         DT.approve(pool_address, num_DT_base, from_wallet=from_wallet)
         
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         pool.swapExactAmountIn(
             tokenIn_address = DT_address, #entering pool
             tokenAmountIn_base = num_DT_base, #""
@@ -251,7 +251,7 @@ class Ocean:
     
     def get_DT_price_base(self, pool_address: str) -> int:
         DT_address = self._DT_address(pool_address)
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         return pool.getSpotPrice_base(
             tokenIn_address = self.OCEAN_address,
             tokenOut_address = DT_address)
@@ -270,7 +270,7 @@ class Ocean:
         OCEAN = BToken(self._web3, self.OCEAN_address)
         OCEAN.approve(pool_address, max_num_OCEAN_base, from_wallet=from_wallet)
         
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         pool.joinPool(num_BPT_base, [max_num_DT_base, max_num_OCEAN_base],
                       from_wallet=from_wallet)
         
@@ -278,12 +278,12 @@ class Ocean:
     def _DT_address(self, pool_address: str) -> str:
         """Returns the address of this pool's datatoken."""
         assert self._is_valid_DT_OCEAN_pool(pool_address)
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         return pool.getCurrentTokens()[0]
 
     
     def _is_valid_DT_OCEAN_pool(self, pool_address) -> bool:
-        pool = SPool(self._web3, pool_address)
+        pool = BPool(self._web3, pool_address)
         if pool.getNumTokens() != 2:
             return False
 

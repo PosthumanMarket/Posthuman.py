@@ -6,7 +6,7 @@ from ocean_lib.ocean import util
 from ocean_lib.web3_internal.wallet import Wallet
 
 
-class SPool(BToken):    
+class BPool(BToken):    
     def __init__(self, web3, contract_address: str):
         self.web3 = web3
         abi = self._abi()
@@ -19,7 +19,7 @@ class SPool(BToken):
 
     def __str__(self):
         s = []
-        s += ["SPool:"]
+        s += ["BPool:"]
         s += [f"  pool_address={self.contract.address}"]
         s += [f"  controller address = {self.getController()}"]
         s += [f"  isPublicSwap = {self.isPublicSwap()}"]
@@ -63,10 +63,10 @@ class SPool(BToken):
         return "\n".join(s)
 
     def _abi(self):
-        return util.abi(filename='./abi/SPool.abi')
+        return util.abi(filename='./abi/BPool.abi')
 
     #============================================================
-    #reflect SPool Solidity methods: everything at Balancer Interfaces "SPool"
+    #reflect BPool Solidity methods: everything at Balancer Interfaces "SPool"
     # docstrings are adapted from Balancer API 
     # https://docs.balancer.finance/smart-contracts/api
 

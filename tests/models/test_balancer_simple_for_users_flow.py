@@ -2,8 +2,8 @@ import pytest
 import sys
 
 from ocean_lib import Ocean
-from ocean_lib.models.sfactory import SFactory
-from ocean_lib.models.spool import SPool
+from ocean_lib.models.bfactory import BFactory
+from ocean_lib.models.bpool import BPool
 from ocean_lib.models.btoken import BToken
 from ocean_lib.models import bconstants
 from ocean_lib.ocean import util

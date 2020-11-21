@@ -3,7 +3,7 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "spoolTemplate",
+                "name": "bpoolTemplate",
                 "type": "address"
             }
         ],
@@ -30,17 +30,17 @@
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "newSPoolAddress",
+                "name": "newBPoolAddress",
                 "type": "address"
             },
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "spoolTemplateAddress",
+                "name": "bpoolTemplateAddress",
                 "type": "address"
             }
         ],
-        "name": "SPoolCreated",
+        "name": "BPoolCreated",
         "type": "event"
     },
     {
@@ -49,7 +49,7 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "spoolAddress",
+                "name": "bpoolAddress",
                 "type": "address"
             },
             {
@@ -65,7 +65,7 @@
                 "type": "uint256"
             }
         ],
-        "name": "SPoolRegistered",
+        "name": "BPoolRegistered",
         "type": "event"
     },
     {
@@ -352,7 +352,7 @@
     {
         "constant": true,
         "inputs": [],
-        "name": "getSPool",
+        "name": "getBPool",
         "outputs": [
             {
                 "internalType": "address",
@@ -373,11 +373,11 @@
                 "type": "address"
             }
         ],
-        "name": "newSPool",
+        "name": "newBPool",
         "outputs": [
             {
                 "internalType": "address",
-                "name": "spool",
+                "name": "bpool",
                 "type": "address"
             }
         ],

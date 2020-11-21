@@ -27,8 +27,8 @@ def dtfactory_address():
     return _dtfactory_address()
 
 @pytest.fixture
-def sfactory_address():
-    return _sfactory_address()
+def bfactory_address():
+    return _bfactory_address()
 
 @pytest.fixture
 def OCEAN_address():
@@ -105,7 +105,7 @@ def make_info(name, private_key_name):
     config = {'network': _NETWORK,
               'privateKey': info.private_key,
               'dtfactory.address': _dtfactory_address(),
-              'sfactory.address': _sfactory_address(),
+              'bfactory.address': _sfactory_address(),
               'OCEAN.address': _OCEAN_address(),
     }
     info.ocean = Ocean(config)
@@ -129,7 +129,7 @@ def _deployAndMintToken(symbol: str, to_address: str) -> btoken.BToken:
 def _dtfactory_address():
     return util.confFileValue(_NETWORK, 'DTFACTORY_ADDRESS')
 
-def _sfactory_address():
+def _bfactory_address():
     return util.confFileValue(_NETWORK, 'SFACTORY_ADDRESS')
 
 def _OCEAN_address():

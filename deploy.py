@@ -88,14 +88,14 @@ def deploy(network):
         dt_template.address, {'from': deployer_account})
     print("****Deploy 'DTFactory': done****\n")
     
-    print("****Deploy SPool: begin****")
-    spool_template = p.SPool.deploy({'from': deployer_account})
-    print("****Deploy SPool: done****\n")
+    print("****Deploy BPool: begin****")
+    bpool_template = p.BPool.deploy({'from': deployer_account})
+    print("****Deploy BPool: done****\n")
     
-    print("****Deploy 'SFactory': begin****")
-    sfactory = p.SFactory.deploy(spool_template.address,
+    print("****Deploy 'BFactory': begin****")
+    bfactory = p.BFactory.deploy(bpool_template.address,
                                  {'from': deployer_account})
-    print("****Deploy 'SFactory': done****\n")
+    print("****Deploy 'BFactory': done****\n")
 
     if network == 'ganache':
         print("****Deploy fake OCEAN: begin****")
@@ -124,7 +124,7 @@ def deploy(network):
 
     s = f"""****Things to update in ~/ocean.conf****"
 DTFACTORY_ADDRESS = {dtfactory.address}
-SFACTORY_ADDRESS = {sfactory.address}"""
+SFACTORY_ADDRESS = {bfactory.address}"""
     if network == "ganache":
         s += f"""
 OCEAN_ADDRESS = {OCEAN_token.address}"""
