@@ -79,13 +79,15 @@ def deploy(network):
     print("****Deploy DataTokenTemplate: begin****")
     minter_addr = deployer_account.address
     cap = 2**255
+    fee_addr = deployer_account.address
     dt_template = p.DataTokenTemplate.deploy(
-        'Template', 'TEM', minter_addr, cap, 'blob', {'from': deployer_account})
+        'Template', 'TEM', minter_addr, cap, 'blob', fee_addr, {'from': deployer_account})
     print("****Deploy DataTokenTemplate: done****\n")
         
     print("****Deploy 'DTFactory': begin****")
+    fee_addr = deployer_account.address
     dtfactory = p.DTFactory.deploy(
-        dt_template.address, {'from': deployer_account})
+        dt_template.address, fee_addr, {'from': deployer_account})
     print("****Deploy 'DTFactory': done****\n")
     
     print("****Deploy BPool: begin****")
@@ -103,8 +105,9 @@ def deploy(network):
         minter_addr = deployer_account.address
         OCEAN_cap = 1410 * 10**6 #1.41B
         OCEAN_cap_base = util.toBase18(float(OCEAN_cap))
+        fee_addr = deployer_account.address
         OCEAN_token = p.DataTokenTemplate.deploy(
-            'Ocean', 'OCEAN', minter_addr, OCEAN_cap_base, '', 
+            'Ocean', 'OCEAN', minter_addr, OCEAN_cap_base, '', fee_addr,
             {'from': deployer_account}) 
         print("****Deploy fake OCEAN: done****\n")
 
