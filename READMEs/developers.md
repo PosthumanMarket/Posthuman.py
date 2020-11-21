@@ -40,7 +40,7 @@ python
 ```
 
 Troubleshooting ideas:
-- `pip install -e .[dev]'
+- `pip install -e .[dev]`
 - `python -m pip install ocean_utils` (without sudo)
 - More ideas at [brownie-instrs](https://github.com/trentmc/brownie-instrs) 
 
