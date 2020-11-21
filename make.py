@@ -26,17 +26,19 @@ source venv/bin/activate
 pip install -r requirements.txt""")
     sys.exit(0)
 
-if not os.path.exists('/tmp/ocean-contracts'):
-    print('===  Clone ocean-contracts')
-    os.system('cd /tmp; git clone https://github.com/oceanprotocol/ocean-contracts; cd -')
-else:
-    print('===  Update ocean-contracts')
-    os.system('cd /tmp/ocean-contracts; git pull; cd -')
+if not os.path.exists('/tmp/contracts'):
+    print('===  Clone contracts')
+    os.system('cd /tmp; git clone https://github.com/oceanprotocol/contracts; git checkout 7a48ca50c14f9117bc808c997585f071fb4285b3; cd -')
+    # don't need to ever update them, since it's an old version
+# else:
+#     print('===  Update contracts')
+#     os.system('cd /tmp/contracts; git pull; cd -')
 
 if not os.path.exists('/tmp/openzeppelin-contracts'):  # note that we use v0.2.5
     print('===  Clone openzeppelin-contracts')
     os.system('cd /tmp; git clone --branch v2.5.0 https://github.com/OpenZeppelin/openzeppelin-contracts.git; cd -')
     # don't need to ever update them, since it's an old version
+    
 print('===Clone/update .sol sources: done')
 
 SUBDIRS = ['build', 'contracts', 'interfaces', 'reports', 'scripts']#no 'tests'
@@ -52,11 +54,11 @@ for subdir in SUBDIRS:
 os.system(f'rm -rf {TEMP_BROWNIE_DIR}')
 CONTRACTDIR = './contracts'
 BUILDDIR = './build'
+NEW_CONTRACTDIR = './new_contracts' #contracts this repo, vs other repos
 
 print(f'===Populate {CONTRACTDIR}')
-os.system(f'cp /tmp/ocean-contracts/contracts/*.sol {CONTRACTDIR}')
-os.system(f'cp /tmp/ocean-contracts/contracts/*/*.sol {CONTRACTDIR}')
-os.system(f'cp /tmp/ocean-contracts/contracts/*/*/*.sol {CONTRACTDIR}')
+os.system(f'cp /tmp/contracts/contracts/*.sol {CONTRACTDIR}')
+os.system(f'cp /tmp/contracts/contracts/*/*.sol {CONTRACTDIR}')
 
 os.system(f'cp /tmp/openzeppelin-contracts/contracts/ownership/Ownable.sol {CONTRACTDIR}/')
 os.system(f'cp /tmp/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol {CONTRACTDIR}/')
@@ -64,6 +66,8 @@ os.system(f'cp /tmp/openzeppelin-contracts/contracts/token/ERC20/../../GSN/Conte
 #os.system(f'cp /tmp/openzeppelin-contracts/contracts/token/ERC20/./IERC20.sol {CONTRACTDIR}') #use BToken
 os.system(f'cp /tmp/openzeppelin-contracts/contracts/token/ERC20/../../math/SafeMath.sol {CONTRACTDIR}')
 os.system(f'cp /tmp/openzeppelin-contracts/contracts/token/ERC20/../../utils/Address.sol {CONTRACTDIR}')
+
+os.system(f'cp {NEW_CONTRACTDIR}/BToken.sol {CONTRACTDIR}')
 
 #----------------------
 print('===In-place change .sol files: flatten imports, more')
@@ -101,7 +105,7 @@ os.system(f'cd {CONTRACTDIR}; brownie compile; cd -')
 print('===Update abi/')
 # these are needed for ocean_lib/Ocean.py to be independent of brownie
 for module in ['DataTokenTemplate', 'DTFactory', \
-               'SFactory', 'SPool', 'BToken']: 
+               'BFactory', 'BPool', 'BToken']: 
     with open(f'{BUILDDIR}/contracts/{module}.json', 'r') as f:
         json_dict = json.loads(f.read())
     with open(f'abi/{module}.abi', 'w') as f:

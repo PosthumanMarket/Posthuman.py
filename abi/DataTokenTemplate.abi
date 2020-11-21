@@ -13,7 +13,7 @@
             },
             {
                 "internalType": "address",
-                "name": "minter",
+                "name": "minterAddress",
                 "type": "address"
             },
             {
@@ -25,6 +25,11 @@
                 "internalType": "string",
                 "name": "blob",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             }
         ],
         "payable": false,
@@ -60,6 +65,136 @@
         "anonymous": false,
         "inputs": [
             {
+                "indexed": false,
+                "internalType": "address",
+                "name": "currentMinter",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "newMinter",
+                "type": "address"
+            }
+        ],
+        "name": "MinterApproved",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "currentMinter",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "newMinter",
+                "type": "address"
+            }
+        ],
+        "name": "MinterProposed",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bytes32",
+                "name": "orderTxId",
+                "type": "bytes32"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "consumer",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "serviceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "provider",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "timestamp",
+                "type": "uint256"
+            }
+        ],
+        "name": "OrderFinished",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "consumer",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "payer",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "serviceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "timestamp",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "mrktFeeCollector",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketFee",
+                "type": "uint256"
+            }
+        ],
+        "name": "OrderStarted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
                 "indexed": true,
                 "internalType": "address",
                 "name": "src",
@@ -80,6 +215,51 @@
         ],
         "name": "Transfer",
         "type": "event"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "BASE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "BASE_COMMUNITY_FEE_PERCENTAGE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "BASE_MARKET_FEE_PERCENTAGE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
     },
     {
         "constant": true,
@@ -117,7 +297,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "value",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -129,6 +309,15 @@
                 "type": "bool"
             }
         ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [],
+        "name": "approveMinter",
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
@@ -171,6 +360,32 @@
     },
     {
         "constant": true,
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "feePercentage",
+                "type": "uint256"
+            }
+        ],
+        "name": "calculateFee",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "constant": true,
         "inputs": [],
         "name": "cap",
         "outputs": [
@@ -190,9 +405,9 @@
         "name": "decimals",
         "outputs": [
             {
-                "internalType": "uint256",
+                "internalType": "uint8",
                 "name": "",
-                "type": "uint256"
+                "type": "uint8"
             }
         ],
         "payable": false,
@@ -221,6 +436,36 @@
                 "type": "bool"
             }
         ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": false,
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "orderTxId",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "address",
+                "name": "consumer",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "serviceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "finishOrder",
+        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
@@ -266,7 +511,7 @@
             },
             {
                 "internalType": "address",
-                "name": "minter",
+                "name": "minterAddress",
                 "type": "address"
             },
             {
@@ -278,6 +523,11 @@
                 "internalType": "string",
                 "name": "blob",
                 "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "feeCollector",
+                "type": "address"
             }
         ],
         "name": "initialize",
@@ -329,21 +579,6 @@
         "type": "function"
     },
     {
-        "constant": true,
-        "inputs": [],
-        "name": "isPaused",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "constant": false,
         "inputs": [
             {
@@ -359,8 +594,23 @@
         ],
         "name": "mint",
         "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "constant": true,
+        "inputs": [],
+        "name": "minter",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "payable": false,
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -380,8 +630,14 @@
     },
     {
         "constant": false,
-        "inputs": [],
-        "name": "pause",
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newMinter",
+                "type": "address"
+            }
+        ],
+        "name": "proposeMinter",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
@@ -392,11 +648,26 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "minter",
+                "name": "consumer",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "serviceId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "mrktFeeCollector",
                 "type": "address"
             }
         ],
-        "name": "setMinter",
+        "name": "startOrder",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
@@ -437,12 +708,12 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "to",
+                "name": "recipient",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "value",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -463,17 +734,17 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "from",
+                "name": "sender",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "to",
+                "name": "recipient",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "value",
+                "name": "amount",
                 "type": "uint256"
             }
         ],
@@ -485,15 +756,6 @@
                 "type": "bool"
             }
         ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [],
-        "name": "unpause",
-        "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
