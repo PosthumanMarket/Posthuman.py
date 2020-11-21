@@ -133,32 +133,28 @@ Lets's do some stuff with Brownie. First, start the console. We specify the netw
 brownie console --network ganache
 ```
 
-Play in brownie console! Here's an end-to-end example that deploys a factory (and token template), creates a token, then retreives the token address:
+Play in brownie console! Below, we deploy a dt factory and dt template, then creates a dt:
 ```python
 
->>> factory_deployer_account = network.accounts.add(private_key='0x904365e293b9fab9bd11bddd39082396d56d30779efbb3ffb0a6089027902c4a')
+>>> deployer_acct = network.accounts.add(private_key='0x904365e293b9fab9bd11bddd39082396d56d30779efbb3ffb0a6089027902c4a')
 
->>> ERC20_template = DataTokenTemplate.deploy("Template","TEMPLATE", factory_deployer_account.address, 1000, "blob", factory_deployer_account.address, {'from':factory_deployer_account
-})                                                                                                                                                                                     
+>>> dt_template = DataTokenTemplate.deploy("Template","TEMPLATE", deployer_acct.address, 1000, "blob", deployer_acct.address, {'from':deployer_acct})
+
 Transaction sent: 0xc17f63a24aac9e906ee7847f8a21c13f00e937a6e0ad1eebf32b412f347f380b
   Gas price: 0.0 gwei   Gas limit: 6721975
   DataTokenTemplate.constructor confirmed - Block: 1   Gas used: 1616110 (24.04%)
   DataTokenTemplate deployed at: 0xE7b2aEceba7367057287980187A0477D8012C4F9
 
->>> factory = DTFactory.deploy(ERC20_template.address, factory_deployer_account.address, {'from':factory_deployer_account})                                                              
+>>> dt_factory = DTFactory.deploy(dt_template.address, deployer_acct.address, {'from':deployer_acct})                                                              
 Transaction sent: 0x9785143287fb92add792923478946b299701d2bce9a6074fbe7e1d0a1b77bd93
   Gas price: 0.0 gwei   Gas limit: 6721975
   DTFactory.constructor confirmed - Block: 2   Gas used: 692655 (10.30%)
   DTFactory deployed at: 0x6a7eaF9c068C9742646C121e66625aeeE1CE6A02
 
->>> factory.createToken("Test Token", "TST", 1000, "test blob", accounts[0].address, {'from':accounts[0]})                                                                             
+>>> dt_factory.createToken("test blob", "Test Token", "TST", 1000, {'from':accounts[0]})                                                                             
 Transaction sent: 0x09ad403c6aa481596de03c5a9d662ab46799154a0f857c8b09d5efd3bc4f06bf
   Gas price: 0.0 gwei   Gas limit: 6721975
   DTFactory.createToken confirmed - Block: 3   Gas used: 254228 (3.78%)
-
-<Transaction '0x09ad403c6aa481596de03c5a9d662ab46799154a0f857c8b09d5efd3bc4f06bf'>
->>> token_address = factory.getTokenAddress("TST")
-'0x9f5C0E5080890F00Cf7Df7AD1D112503d1bf6c14'
 
 ```
 
@@ -204,8 +200,8 @@ _file = token.download()
 
 We can also combine objects from 6a, for richer debugging. For example:
 ```python
-factory_deployer_account = network.accounts.add(private_key='0x904365e293b9fab9bd11bddd39082396d56d30779efbb3ffb0a6089027902c4a')
+deployer_acct = network.accounts.add(private_key='0x904365e293b9fab9bd11bddd39082396d56d30779efbb3ffb0a6089027902c4a')
 
-brownie_datatoken = DataTokenTemplate.deploy("Template2","TEMPLATE2", factory_deployer_account.address, 1000, "blob", factory_deployer_account.address, {'from' : factory_deployer_account}) 
-brownie_datatoken.mint(factory_deployer_account.address, 10, {'from': factory_deployer_account, 'value':100000000000})
+brownie_datatoken = DataTokenTemplate.deploy("Template2","TEMPLATE2", deployer_acct.address, 1000, "blob", deployer_acct.address, {'from' : deployer_acct}) 
+brownie_datatoken.mint(deployer_acct.address, 10, {'from': deployer_acct, 'value':100000000000})
 ```
