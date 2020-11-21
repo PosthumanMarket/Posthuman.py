@@ -31,6 +31,12 @@ Install modules in the env't. Notably, it installs [Brownie](https://eth-brownie
 pip install -r requirements_dev.txt 
 ```
 
+Test that the python version plays well with brownie. The following should not fail. If it does, [brownie-instrs](https://github.com/trentmc/brownie-instrs) may help. And other jiggling;)
+```
+python
+> import brownie
+```
+
 If you don't have an Infura account and you aim to deploy to `rinkeby` or `mainnet`, go to www.infura.io and sign up.
 
 Private keys etc can't live on GitHub. To handle this, ocean-lib-py tools read ~/ocean.conf. (It does *not* use environmental variables.) Start with the pre-set template:
