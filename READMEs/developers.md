@@ -31,11 +31,15 @@ Install modules in the env't. Notably, it installs [Brownie](https://eth-brownie
 pip install -r requirements_dev.txt 
 ```
 
-Test that the python version plays well with brownie. The following should not fail. If it does, [brownie-instrs](https://github.com/trentmc/brownie-instrs) may help. And other jiggling;)
+Test that the python version plays well with brownie. The following should not fail. 
 ```
 python
 > import brownie
 ```
+
+If the above fails, some things to try:
+- `python -m pip install eth-brownie` (without sudo)
+- More ideas at [brownie-instrs](https://github.com/trentmc/brownie-instrs) 
 
 If you don't have an Infura account and you aim to deploy to `rinkeby` or `mainnet`, go to www.infura.io and sign up.
 
