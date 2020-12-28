@@ -9,7 +9,9 @@ Posthuman Marketplace is a fork of the ocean marketplace, aimed at the following
 Posthuman Marketplace contracts are currently deployed on Rinkerby. The code is complete for the above functionality. Additional functionality will be added in the next two months.
 
 Refer to the following files for a demonstration of the functionality:
+
 Custom_Marketplace_flow: Demonstrates how a consumer (Bob) can train and use the model in zero knowledge using datatokens and computute to data. [Rinkerby]
+
 Custom_Reward_Mechanism: shows how a trainer (Charlie) can get rewarded PH coins for improving the loss score. PH coins will eventually be bought back with a share of marketplace revenue, giving them value. [Rinkerby]
 
 Computing Cluster:
