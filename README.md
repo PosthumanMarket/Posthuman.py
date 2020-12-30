@@ -20,14 +20,23 @@ We've implemented three separate, customized compute-to-data services:
 Which together give Posthuman PoC the following functionality:
 
    1. Alice publishes a GPT-2 model in a compute to data environment. 
+   
    2. Bob buys datatokens and runs further training on the WikiText-2 dataset, using the train_lm.py algorithim. [compute_service_train]
+   
    3. The updated model (M2)- 
+   
    i) remains on alice's machine;
+   
    ii) is published as an asset on ocean
+   
    iii) Bob is rewarded with datatokens of the newly trained model
+   
    4. Charlie decides to train the model further, purchasing datatokens from Bob, creating demand. 
+   
    5. The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [compute_service_train]
+   
    6. Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [compute_service_inference]
+   
    7. Elena is unsure if the model she is using (M3) is worth what she is paying. She runs an ‘evaluation.py’ C2D request and learns that the model she’s using does indeed have better performance on her dataset than the published SoTA. [compute_service_inference]
 
 This mechanism serves as a basic pay-it-forward method of rewarding intermediate trainers before a model reaches commercial utility. Crucially, all model updates are performed in zero-knowledge to Bob, Charlie and Derek - they simply stake funds on further training and are rewarded with tokens of the updated model.
