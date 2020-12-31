@@ -1,7 +1,7 @@
 # Quickstart: Marketplace Flow with compute-to-data for Posthuman
 
 This tutorial demonstrates publishing a dataset with `compute` service.
-The data asset used is a pre-trained GPT-2 Model, which is used to provide compute_service_train.
+The data asset used is a pre-trained GPT-2 Model, which is used to provide compute_service_evaluate, using the algorithim algo_eval_wikitext.py .
 
 As we are utilising large transformer models, for end-to-end testing this requires Alice to be running a kubernetes cluster at localhost:8080, with at least 1 NVIDIA-V100 GPU. In posthuman, the marketplace will serve Alice's role; users need only worry about the process followed by Bob from step 4.
 
