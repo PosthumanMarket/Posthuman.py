@@ -47,6 +47,8 @@ Alice is the only trusted party in this setup as the model resides on her hardwa
 
 More complex incentive mechanisms can be structured along similar lines - for eg. 50% of datatokens to last trainer, 25% to the one before, 12.5% and so on.
 
+To perform an end-to-end deployment of the wikitext-evaluation compute service, refer:
+https://github.com/dhruvluci/ocean.py/blob/updated2/READMEs/compute-flow-posthuman.md
 
 *Computing Cluster:*
 We've set up a V100 GPU based kubernetes cluster for optimial efficiency in training and inference from large transformers. We will eventually expand this to 100s of GPUs to support GPT-3 scale models.
