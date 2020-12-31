@@ -6,33 +6,53 @@ Posthuman Marketplace is a fork of ocean lib, aimed at implementing the followin
 1. Verifiably Training, Evaluating, and utilising models in Zero-Knowledge using Compute-to-Data
 2. Reward contributors to training to incentivise large-scale federated training.
 
-Posthuman Marketplace is currently deployed on Rinkeby. The code is complete for the above functionality. Additional functionality will be added in the next two months.
+Posthuman Marketplace is currently deployed on Rinkeby. The code is complete for the above functionality. Additional functionality will be added in the next two months. Posthuman relies on the huggingface-transformers library for training and inference scripts, and is deployed on a kubernetes V100 cluster.
 
-More specifically, the Posthuman PoC enables the following functionality:
+We've implemented three separate, customized compute-to-data services:
 
-1. Alice publishes a GPT-2 model in a compute to data environment. There are two approved algorithims: train_lm.py and inference_lm.py. [publish_model_with_compute.py]
-2. Bob buys datatokens and runs further training on the WikiText-2 dataset, using the train_lm.py algorithim. [Consume_Compute_Train.py]
-3. The updated model (M2) 
-i) remains on alice's machine;
-ii) is published as an asset on ocean
-iii) Bob is rewarded with datatokens of the newly trained model
-4. Charlie decides to train the model further, purchasing datatokens from Bob, creating demand. [Consume_Compute_Train.py]
-5. The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie
-6. Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [[Consume_Compute_Inference.py]]
+   - compute_service_train [with reward mechanism]
+   
+   - compute_service_inference
+   
+   - compute_service_evaluate
+   
+
+These give Posthuman PoC the following functionality:
+
+   1. Alice publishes a GPT-2 model in a compute to data environment. 
+   
+   2. Bob buys datatokens and runs further training on the WikiText-2 dataset, using the train_lm.py algorithim. [compute_service_train]
+   
+   3. The updated model (M2)- 
+   
+   i) remains on alice's machine;
+   
+   ii) is published as an asset on ocean
+   
+   iii) Bob is rewarded with datatokens of the newly trained model
+   
+   4. Charlie decides to train the model further, purchasing datatokens from Bob, creating demand. 
+   
+   5. The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [compute_service_train]
+   
+   6. Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [compute_service_inference]
+   
+   7. Elena is unsure if the model she is using (M3) is worth what she is paying. She runs an ‘evaluation.py’ C2D request and learns that the model she’s using does indeed have better performance on her dataset than the published SoTA. [compute_service_inference]
 
 This mechanism serves as a basic pay-it-forward method of rewarding intermediate trainers before a model reaches commercial utility. Crucially, all model updates are performed in zero-knowledge to Bob, Charlie and Derek - they simply stake funds on further training and are rewarded with tokens of the updated model.
+
+Interestingly, while technically 'owners' of the model, Bob, Charlie etc. cannot see the model they ostensibly owned. This gives rises to new incentive dynamics of zk-ownership, which are discussed more fully in a separate document.
 
 Alice is the only trusted party in this setup as the model resides on her hardware. In our scenario, Alice represents the PostHuman Marketplace. Posthuman provides the trusted computing backend on which model training and inference occurs. Posthuman is incentivised to protect privacy of each model to ensure all value stays in the ocean ecosystem, and the marketplace as a whole succeeds.
 
 More complex incentive mechanisms can be structured along similar lines - for eg. 50% of datatokens to last trainer, 25% to the one before, 12.5% and so on.
 
 
-Computing Cluster:
+*Computing Cluster:*
 We've set up a V100 GPU based kubernetes cluster for optimial efficiency in training and inference from large transformers. We will eventually expand this to 100s of GPUs to support GPT-3 scale models.
 
-Algorithims:
+*Algorithims:*
 We've included versatile training and inference algorithims from huggingface for use on our marketplace. Small modifications to these templates will cover virtually all transformer fine-tuning and inference use cases.
-
 
 
 # ocean-lib
