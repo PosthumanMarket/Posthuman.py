@@ -164,11 +164,11 @@ def main(did, pool_address, order_tx_id=None):
         return
 
     print(f'Requesting compute using asset {asset.did} and pool {pool.address}')
-algo_file = './examples/data/algorithm.py'
-#order_tx_id=
-order_tx_id=''
-job_id, status = run_compute(ocean, asset.did, consumer, algo_file, pool.address, order_tx_id)
-print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')
+    algo_file = './examples/data/algorithm.py'
+    #order_tx_id=
+    order_tx_id=''
+    job_id, status = run_compute(ocean, asset.did, consumer, algo_file, pool.address, order_tx_id)
+    print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')
 
 
 if __name__ == '__main__':
