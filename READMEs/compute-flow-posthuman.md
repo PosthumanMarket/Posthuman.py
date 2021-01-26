@@ -87,6 +87,7 @@ from examples.compute_service import build_compute_descriptor, get_config_dict, 
 ## 2. Alice publishes assets for data services (= publishes a DataToken contract), Mints 100 tokens, and creates a pool
 
 ```ocean = Ocean(config=Config(options_dict=get_config_dict()))
+        ocean = Ocean(config=Config(options_dict=get_config_dict()))
         publisher = Wallet(ocean.web3, private_key='0xc594c6e5def4bab63ac29eed19a134c130388f74f019bc74b8f4389df2837a58')  # 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260
         #consumer = Wallet(ocean.web3, private_key='0x9bf5d7e4978ed5206f760e6daded34d657572bd49fa5b3fe885679329fb16b16')  # 0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0
         publisher_wallet = Wallet(ocean.web3, private_key=os.getenv('Publisher_Key')) #addr: 0xc966Ba2a41888B6B4c5273323075B98E27B9F364
