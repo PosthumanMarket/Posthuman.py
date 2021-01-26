@@ -1,9 +1,9 @@
 # Quickstart: Marketplace Flow with compute-to-data for Posthuman
 
 This tutorial demonstrates publishing a dataset with `compute` service.
-The data asset used is a pre-trained GPT-2 Model, which is used to provide compute_service_train.
+The data asset used is a pre-trained GPT-2 Model, which is used to provide compute_service_evaluate, using the algorithim algo_eval_wikitext.py .
 
-As we are utilising large transformer models, for end-to-end testing this requires Alice to be running a kubernetes cluster at localhost:8080, with at least 1 NVIDIA-V100 GPU. In posthuman, the marketplace will serve Alice's role; users need only worry about the process followed by Bob from step 4.
+As we are utilising large transformer models, for end-to-end testing this requires Alice to be running a kubernetes cluster at localhost:8080, with at least 1 NVIDIA-V100 GPU. In posthuman, the marketplace will serve Alice's role; users need only worry about the process followed by Bob from step 3 on.
 
 We will be connecting to the `rinkeby` test net and the Ocean Protocol 
 supporting services.
@@ -58,7 +58,7 @@ export the following env variables, including credentials for two Rinkerby walle
 export NETWORK_URL=''
 export Publisher_Key=''
 export Consumer_Key=''
-
+```
 ## 2A. Perform imports
 ```
 python
@@ -87,6 +87,7 @@ from examples.compute_service import build_compute_descriptor, get_config_dict, 
 ## 2. Alice publishes assets for data services (= publishes a DataToken contract), Mints 100 tokens, and creates a pool
 
 ```ocean = Ocean(config=Config(options_dict=get_config_dict()))
+        ocean = Ocean(config=Config(options_dict=get_config_dict()))
         publisher = Wallet(ocean.web3, private_key='0xc594c6e5def4bab63ac29eed19a134c130388f74f019bc74b8f4389df2837a58')  # 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260
         #consumer = Wallet(ocean.web3, private_key='0x9bf5d7e4978ed5206f760e6daded34d657572bd49fa5b3fe885679329fb16b16')  # 0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0
         publisher_wallet = Wallet(ocean.web3, private_key=os.getenv('Publisher_Key')) #addr: 0xc966Ba2a41888B6B4c5273323075B98E27B9F364
@@ -111,10 +112,8 @@ from examples.compute_service import build_compute_descriptor, get_config_dict, 
 ```
 
 
-```
 
-
-## 4. Value swap: Bob buys datatokens from marketplace (using datatoken <> OCEAN balancer pool)
+## 3. Value swap: Bob buys datatokens from marketplace (using datatoken <> OCEAN balancer pool)
 
 ```python
 from ocean_lib.ocean.util import to_base_18
@@ -134,7 +133,7 @@ market_ocean.pool.buy_data_tokens(
 print(f'bob has {data_token.token_balance(bob_wallet.address} datatokens.')
 ```
    
-## 5. Bob uses compute service of GPT-2 to further train it for 500 steps in exchange for 1 datatoken
+## 4. Bob uses compute service of GPT-2 to further train it for 500 steps in exchange for 1 datatoken
 
 ```python
 #Bob Consumes Service
