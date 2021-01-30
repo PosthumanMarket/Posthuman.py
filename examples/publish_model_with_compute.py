@@ -66,7 +66,7 @@ market_ocean.pool.buy_data_tokens(
 
 
 print(f'bob has {data_token.token_balance(bob_wallet.address)} datatokens.')
-
+market_address = 0xc966Ba2a41888B6B4c5273323075B98E27B9F364
 quote = ocean.assets.order(asset.did, bob_wallet.address, service_index=service.index)
 order_tx_id = market_ocean.assets.pay_for_service(
     quote.amount, quote.data_token_address, asset.did, service.index, market_address, bob_wallet
