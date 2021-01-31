@@ -2,10 +2,22 @@
 This README demonstrates how Alice, a model provider, publishes and monetizes her model using Posthuman.
 
 
-## 1. Setup : Alice runs her own provider on her own hardware to ensure privacy of the model
+## 1. Setup : Alice can either set up her own provider, or point to the Posthuman marketplace provider, that serves as a trusted Model escrow.
+
+def get_config_dict():
+    return {
+        'eth-network': {
+            'network': 'rinkeby',
+        },
+        'resources': {
+            'aquarius.url': 'https://aquarius.rinkeby.oceanprotocol.com',
+            'provider.url': 'http://127.0.0.1:8030/'  # local provider for GPU access
+        }
+    }
 
 
 ## 2. Perform imports
+```
 import os
 
 from ocean_lib.ocean.ocean import Ocean
@@ -26,9 +38,11 @@ from ocean_lib.web3_internal.wallet import Wallet
 import os
 
 from examples.compute_service import build_compute_descriptor, get_config_dict, run_compute, publish_asset
+```
 
 ## 4. Alice publishes a model specified in metadata_model.json as an asset with compute. She mints 100 Datatokens and creates a BPool for trading her DT.
-'''
+
+```
 ocean = Ocean(config=Config(options_dict=get_config_dict()))
 Alice_wallet = Wallet(ocean.web3, private_key=os.getenv('Alice_Key')) #addr: 0xc966Ba2a41888B6B4c5273323075B98E27B9F364
 pool_address=''
@@ -39,11 +53,7 @@ if not (did and pool_address):
         metadata = json.load(f)
 
     asset, pool = publish_asset(metadata, Alice_wallet)
-'''
-
-
-
-
+```
 
 
 #consumer = Wallet(ocean.web3, private_key=os.getenv('Consumer_Key')) #addr: 0xEF5dc33A53DD2ED3F670B53F07cEc5ADD4D80504

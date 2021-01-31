@@ -1,0 +1,76 @@
+{   
+    "service": [
+        {
+            "main": {
+            "type": "dataset",
+            "name": "GPT-2 Pretrained Model",
+            "dateCreated": "2021-01-13T10:17:09Z",
+            "author": "Posthuman",
+            "license": "CC0: Public Domain Dedication",
+            "files": [
+              {
+                "contentType": "text/json",
+                "compression": "plain",
+                "index": 0,
+                "url": "s3://transformers-bucket/Models/config.json"
+              },
+              {
+                  "contentType": "application/binary",
+                "compression": "plain",
+                "index": 0,
+                "url": "s3://transformers-bucket/Models/pytorch_model.bin"
+              }
+            ]
+          },
+          "additionalInformation": {
+            "description": "Pre-Trained Model parameters for gpt-2.",
+            "copyrightHolder": "Posthuman",
+            "categories": ["AI"]
+          }
+        },
+        {
+        "type": "compute",
+        "index": 2,
+        "serviceEndpoint": "http://18.217.14.245:8030/",
+        "templateId": "",
+        "attributes": {
+          "main": {
+            "name": "dataAssetComputingServiceAgreement",
+            "creator": "0xc966Ba2a41888B6B4c5273323075B98E27B9F364",
+            "datePublished": "2021-01-09T19:02:11Z",
+            "cost": "1.0",
+            "timeout": 86400,
+            "provider": {
+              "type": "AWS",
+              "description": "GPU-V100 (p3x2large instance)",
+              "environment": {
+                "cluster": {
+                  "type": "Kubernetes",
+                  "url": "http://18.217.14.245:8443/"
+                },
+                "supportedContainers": [
+                  {
+                    "image": "huggingface/transformers-pytorch-gpu",
+                    "tag": "latest"
+                  }
+                ],
+                "supportedServers": [
+                  {
+                    "serverId": "1",
+                    "serverType": "p3_2xl",
+                    "price": "10",
+                    "cpu": "8",
+                    "gpu": "1",
+                    "memory": "64gb",
+                    "disk": "300gb",
+                    "maxExecutionTime": 86400
+                  }
+                ]
+              }
+            }
+          },
+          "additionalInformation": {}
+        }
+      }
+    ]
+  }
