@@ -1,0 +1,22 @@
+{
+    "main": {
+      "type": "algorithim",
+      "name": "GPT-2 Plaintext Evaluation Algo",
+      "dateCreated": "2021-01-13T10:17:09Z",
+      "author": "Posthuman",
+      "license": "CC0: Public Domain Dedication",
+      "files": [
+        {
+          "contentType": "text/python",
+          "compression": "plain",
+          "index": 0,
+          "url": "https://raw.githubusercontent.com/dhruvluci/Posthuman.py/master_new/examples/data/algo_evaluation.py"
+        } 
+      ]
+    },
+    "additionalInformation": {
+      "description": "Allows inference on text files defined as env vars",
+      "copyrightHolder": "Posthuman",
+      "categories": ["AI"]
+    }
+  }
