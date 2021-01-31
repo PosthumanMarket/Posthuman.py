@@ -1,7 +1,36 @@
 
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
-<h1 align="center">ocean.py</h1>
+<h1 align="center">PostHuman.py</h1>
+> Posthuman Marketplace: Monetize AI models
+
+Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v0.2, Users can now train, infer, and evaluate on any arbitary text data. 
+
+Posthuman's decentralised architecture achieves two goals that are impossible with centralised providers:
+- Verifiable Training and Inference: The end user can know for sure which model served a particular inference request
+- Zero-Knowledge training & ownership: The marketplace controls the models, ensuring each person who contributed to training is rewarded fairly, as all value created by these models remains on-chain and cannot be 'leaked'.
+
+Specifically, the workflow for v0.2 is as follows:
+
+Alice publishes a GPT-2 model M1 in a compute to data environment, trained on any dataset X, using the Marketplace provider.
+Bob buys datatokens and runs further training (finetuning) on any custom dataset Y, using the algo_train.py algorithm, to created updated model M2.
+
+The updated model (M2)-
+i) remains on the marketplace’s machine;
+ii) is published as an asset on ocean
+iii) Bob and Alice are rewarded with datatokens of the newly trained model
+
+Charlie decides to train the model further, purchasing datatokens from Bob, creating demand.
+The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [algo_train.py]
+
+Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [algo_inference.py]
+
+Elena is unsure if the model she is using (M3) is worth what she is paying. She runs an [algo_evaluation.py] C2D request and learns that the model she’s using does indeed have better performance on her dataset than the published SoTA. 
+
+To get a hands on understanding, we've developed READMEs for each of these users - check out the README folder.
+Furthermore, Posthuman v0.2 now includes a number of tests of the above functionality - check out the tests/posthuman folder.
+
+
 
 > Python library to privately & securely publish, exchange, and consume data.
 
