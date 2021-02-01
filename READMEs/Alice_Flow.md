@@ -1,9 +1,15 @@
 
 This README demonstrates how Alice, a model provider, publishes and monetizes her model using Posthuman.
 
+## 0. ENV VARS : export the following env vars
+```
+export Alice_Key = ''
+```
+
 
 ## 1. Setup : Alice can either set up her own provider, or point to the Posthuman marketplace provider, that serves as a trusted Model escrow.
 
+```
 def get_config_dict():
     return {
         'eth-network': {
@@ -11,10 +17,12 @@ def get_config_dict():
         },
         'resources': {
             'aquarius.url': 'https://aquarius.rinkeby.oceanprotocol.com',
-            'provider.url': 'http://127.0.0.1:8030/'  # local provider for GPU access
+            'provider.url': 'http://127.0.0.1:8030/'  # local provider for
+            # GPU access. use http://18.217.14.245:8030/ for Posthuman 
+            # provider
         }
     }
-
+```
 
 ## 2. Perform imports
 ```
@@ -56,4 +64,4 @@ if not (did and pool_address):
 ```
 
 
-#consumer = Wallet(ocean.web3, private_key=os.getenv('Consumer_Key')) #addr: 0xEF5dc33A53DD2ED3F670B53F07cEc5ADD4D80504
+
