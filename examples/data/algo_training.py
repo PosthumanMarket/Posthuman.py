@@ -9,7 +9,6 @@ import torch
 from transformers import Trainer
 
 
-
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from nltk.tokenize import sent_tokenize
 from numpy.random import choice

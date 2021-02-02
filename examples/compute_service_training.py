@@ -155,7 +155,10 @@ def main(did, pool_address, order_tx_id=None):
     #consumer = Wallet(ocean.web3, private_key='0x9bf5d7e4978ed5206f760e6daded34d657572bd49fa5b3fe885679329fb16b16')  # 0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0
     publisher_wallet = Wallet(ocean.web3, private_key=os.getenv('Publisher_Key')) #addr: 0xc966Ba2a41888B6B4c5273323075B98E27B9F364
     consumer = Wallet(ocean.web3, private_key=os.getenv('Consumer_Key')) #addr: 0xEF5dc33A53DD2ED3F670B53F07cEc5ADD4D80504
-
+    charlie_ocean = ocean
+    charlie_wallet = consumer_wallet
+    #Update for arbitary fine-tuner charlie who gets rewarded.
+    
     if not (did and pool_address):
         metadata_file = './examples/data/metadata.json'
         with open(metadata_file) as f:
@@ -172,10 +175,13 @@ def main(did, pool_address, order_tx_id=None):
         return
 
     print(f'Requesting compute using asset {asset.did} and pool {pool.address}')
-algo_file = './examples/data/training_script.sh'
+algo_file = './examples/data/algo_training.py'
+#Update to v0.2 algorithim
 #Script to train GPT-2 on WikiText-2, Publish the updated model, 
 #and reward Consumer with datatokens of new model
-order_tx_id=''
+quote = market_ocean.assets.order(asset.did, charlie_wallet.address, service_index=service.index)
+order_tx_id = charlie_ocean.assets.pay_for_service(
+    quote.amount, quote.data_token_address, asset.did, service.index, fee_receiver, charlie_wallet)
 job_id, status = run_compute(ocean, asset.did, consumer, algo_file, pool.address, order_tx_id)
     print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')
 
