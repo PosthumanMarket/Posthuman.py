@@ -14,7 +14,7 @@ Specifically, the workflow for v0.2 is as follows:
 
 1. Alice publishes a GPT-2 model M1 in a compute to data environment, trained on any dataset X, using the Marketplace provider.
 
-2. Bob buys datatokens and runs further training (finetuning) on any custom dataset Y, using the algo_train.py algorithm, to created updated model M2.
+2. Bob buys datatokens and runs further training (finetuning) on any custom dataset Y, using the algo_training.py algorithm, to create updated model M2.
 
 3. The updated model (M2)-
 i) remains on the marketplace’s machine;
@@ -22,7 +22,7 @@ ii) is published as an asset on ocean
 iii) Bob and Alice are rewarded with datatokens of the newly trained model
 
 4. Charlie decides to train the model further, purchasing datatokens from Bob, creating demand.
-The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [algo_train.py]
+The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [algo_training.py]
 
 5. Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [algo_inference.py]
 

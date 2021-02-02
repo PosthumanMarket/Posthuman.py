@@ -32,13 +32,13 @@ market_ocean.pool.buy_data_tokens(
     from_wallet=bob_wallet
 )
 
-#Place training text in ENV VAR 'TRAIN_file'; see algo_train.py for other requirements.
+#Place training text in ENV VAR 'TRAIN_file'; see algo_training.py for other requirements.
 
 quote = market_ocean.assets.order(asset.did, bob_wallet.address, service_index=service.index)
 order_tx_id = bob_ocean.assets.pay_for_service(
     quote.amount, quote.data_token_address, asset.did, service.index, fee_receiver, bob_wallet)
 print(f'Requesting compute using asset {asset.did} and pool {pool.address}')
 
-algo_file = '../Posthuman.py/examples/data/algo_train.py'
+algo_file = '../Posthuman.py/examples/data/algo_training.py'
 job_id, status = run_compute(asset.did, consumer, algo_file, pool.address, order_tx_id)
 print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')

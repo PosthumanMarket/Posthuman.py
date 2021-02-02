@@ -18,7 +18,7 @@ def get_config_dict():
         'resources': {
             'aquarius.url': 'https://aquarius.rinkeby.oceanprotocol.com',
             'provider.url': 'http://127.0.0.1:8030/'  # local provider for
-            # GPU access. use http://18.217.14.245:8030/ for Posthuman 
+            # GPU access. Use http://18.217.14.245:8030/ for Posthuman 
             # provider
         }
     }

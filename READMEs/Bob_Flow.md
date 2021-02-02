@@ -15,7 +15,6 @@ market_address = '0xc966Ba2a41888B6B4c5273323075B98E27B9F364' # Hardcoded market
 bob_wallet = Wallet(ocean.web3, private_key=os.getenv('Consumer_Key'))
 data_token = market_ocean.get_data_token(token_address)
 
-
 #point to service
 from ocean_utils.agreements.service_types import ServiceTypes
 asset = market_ocean.assets.resolve(did)
