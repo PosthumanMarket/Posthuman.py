@@ -69,9 +69,9 @@ def run_compute(did, consumer_wallet, algorithm_file, pool_address, order_id=Non
     with open(algorithm_file) as f:
         algorithm_text = f.read()
 
-    # whether to publish the algorithm results as an Ocean assets
+    # Publish output (fine-trained model, or infer/eval results) as asset
     output_dict = {
-        'publishOutput': False,
+        'publishOutput': True,
         'publishAlgorithmLog': False,
     }
     # start the compute job (submit the compute service request)
@@ -81,7 +81,7 @@ def run_compute(did, consumer_wallet, algorithm_file, pool_address, order_id=Non
             'rawcode': algorithm_text,
             'container': {
                 'tag': 'latest',
-                'image': 'amancevice/pandas',
+                'image': 'huggingface/transformers',
                 'entrypoint': 'python $ALGO'
             }
         }
