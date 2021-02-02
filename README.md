@@ -12,9 +12,9 @@ Posthuman's decentralised architecture achieves three goals that are impossible 
 
 Specifically, the workflow for v0.2 is as follows:
 
-1. Alice publishes a GPT-2 model M1 in a compute to data environment, trained on any dataset X, using the Marketplace provider.
+1. Alice publishes a GPT-2 model M1 using PostHuman's compute to data provider, trained on any dataset X. [tests/posthuman-legacy/Alice_flow.py]
 
-2. Bob buys datatokens and runs further training (finetuning) on any custom dataset Y, using the algo_training.py algorithm, to create updated model M2.
+2. Bob buys datatokens and runs further training (finetuning) on any custom dataset Y, using the algo_training.py algorithm, to create updated model M2. [tests/posthuman-legacy/Charlie_flow.py]
 
 3. The updated model (M2)-
 i) remains on the marketplace’s machine;
@@ -22,11 +22,11 @@ ii) is published as an asset on ocean
 iii) Bob and Alice are rewarded with datatokens of the newly trained model
 
 4. Charlie decides to train the model further, purchasing datatokens from Bob, creating demand.
-The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [algo_training.py]
+The second updated model (M3) is likewise published as an asset, and a datatoken reward issued to Charlie [tests/posthuman-legacy/Charlie_flow.py] + [algo_training.py]
 
-5. Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [algo_inference.py]
+5. Derek finds M3 to be sufficiently trained for his commercial use-case. He buys access to the inference endpoints using the DataTokens in Chalie's Possession, completing the demand loop. [tests/posthuman-legacy/Bob_infer_flow.py] + [algo_inference.py]
 
-6. Elena is unsure if the model she is using (M3) is worth what she is paying. She runs an [algo_evaluation.py] C2D request and learns that the model she’s using does indeed have better performance on her dataset than the published SoTA. 
+6. Elena is unsure if the model she is using (M3) is worth what she is paying. She runs an [algo_evaluation.py] C2D request and learns that the model she’s using does indeed have better performance on her dataset than the published SoTA.  [tests/posthuman-legacy/Bob_eval_flow.py]
 
 To get a hands-on understanding, we've developed READMEs for each of these users - check out the README folder.
 Furthermore, Posthuman v0.2 now includes a number of tests of the above functionality - check out the tests/posthuman folder.
