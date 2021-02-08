@@ -32,6 +32,8 @@ if eval_link:
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 
+infer_text = 'Ethereum is a decentralized, open-source blockchain featuring smart contract functionality. Ether (ETH) is the native cryptocurrency'
+
 training_args = TrainingArguments(
     output_dir='./results',          # output directory
     num_train_epochs=3,              # total # of training epochs

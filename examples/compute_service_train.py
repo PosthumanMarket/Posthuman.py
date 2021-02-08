@@ -18,17 +18,17 @@ def get_config_dict():
         },
         'resources': {
             'aquarius.url': 'https://aquarius.rinkeby.oceanprotocol.com',
-            'provider.url': 'http://127.0.0.1:8030/'  # local provider for GPU access
+            'provider.url': 'https://provider.rinkeby.oceanprotocol.com'
         }
     }
 
 
 def build_compute_descriptor(ocean, publisher):
     # build compute service metadata
-    cluster_attributes = ocean.compute.build_cluster_attributes(cluster_type='Kubernetes', url='https://172.31.21.249:8443')
+    cluster_attributes = ocean.compute.build_cluster_attributes(cluster_type='Kubernetes', url='/cluster/url')
     supported_containers = [ocean.compute.build_container_attributes(image='huggingface/transformers', tag='latest', entrypoint='python $ALGO')]
-    servers = [ocean.compute.build_server_attributes(server_id='1', server_type='xlsize', cpu=16, gpu=1, memory='16gb', disk='1tb', max_run_time=3600)]
-    provider_attributes = ocean.compute.build_service_provider_attributes(provider_type='AWS', description='NVIDIA V100 setup',
+    servers = [ocean.compute.build_server_attributes(server_id='1', server_type='xlsize', cpu=16, gpu=0, memory='16gb', disk='1tb', max_run_time=3600)]
+    provider_attributes = ocean.compute.build_service_provider_attributes(provider_type='Azure', description='Compute power 1',
                                                                           cluster=cluster_attributes,
                                                                           containers=supported_containers,
                                                                           servers=servers)
@@ -69,10 +69,10 @@ def run_compute(did, consumer_wallet, algorithm_file, pool_address, order_id=Non
     with open(algorithm_file) as f:
         algorithm_text = f.read()
 
-    # Publish output (fine-trained model, or infer/eval results) as asset
+    # whether to publish the algorithm results as an Ocean assets
     output_dict = {
         'publishOutput': True,
-        'publishAlgorithmLog': False,
+        'publishAlgorithmLog': True,
     }
     # start the compute job (submit the compute service request)
     algorithm_meta = AlgorithmMetadata(
@@ -94,8 +94,18 @@ def run_compute(did, consumer_wallet, algorithm_file, pool_address, order_id=Non
 
     # get the result of the compute run
     result = ocean.compute.result(did, job_id, consumer_wallet)
+
+    metadata_file = './examples/data/metadata_updated_model.json'
+    with open(metadata_file) as f:
+            metadata = json.load(f)
+
+    #This rewards the trainer with datatokens of the updated model        
+    asset, pool = publish_asset(metadata, consumer_wallet)
+    data_token = ocean.create_data_token('GPT-Coin '+consumer_wallet.address, 'GPT2-FT', consumer_wallet, blob=ocean.config.metadata_store_url)
+    token_address = data_token.address
+
     print(f'got result of compute job {job_id}: {result}')
-    return job_id, status
+    return job_id, status, asset, pool
 
 
 def publish_asset(metadata, publisher_wallet):
@@ -119,10 +129,7 @@ def publish_asset(metadata, publisher_wallet):
     assert receipt and receipt.status == 1, f'datatoken mint failed: tx={txid}, txReceipt={receipt}'
 
     # Create datatoken liquidity pool for the new asset
-    #pool = ocean.pool.create(asset.data_token_address, 50, 50, publisher_wallet, 5)
-
-    pool = ocean.pool.create(asset.data_token_address, 10, 10, publisher_wallet, 5)
-
+    pool = ocean.pool.create(asset.data_token_address, 5, 5, publisher_wallet, 5)
     print(f'datatoken liquidity pool was created at address {pool.address}')
 
     # Now the asset can be discovered and consumed
