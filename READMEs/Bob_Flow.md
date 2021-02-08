@@ -6,6 +6,10 @@ Bob require's Alice's models pool address and datatoken address
 token_address = '0x7E227205368243285584a54464fC8A6c2993f5d3'
 pool_address = '0x00Dd3F792be3D13a1C728E329Ae7951d9259014e'
 did = 'did:op:7E227205368243285584a54464fC8A6c2993f5d3'
+
+token_address = '0x1F625a835f51faFd661cBcc9D35cb1e8fcB55Bd7'
+pool_address = '0xa9C03F28A60e29915fECcEEFEC1c37520C0CCE9C'
+did = 'did:op:1F625a835f51faFd661cBcc9D35cb1e8fcB55Bd7'
 ```
 ## 2. Perform Imports
 ```

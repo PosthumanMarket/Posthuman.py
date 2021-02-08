@@ -43,7 +43,9 @@ training_args = TrainingArguments(
 )
 
 trainer = Trainer(model=model, args=training_args, tokenizer=tokenizer, eval_dataset=eval_dataset)
-trainer.evaluate()
+eval_result = trainer.evaluate()
+with open('./eval_result.txt') as f:
+    f.write(str(eval_result))
 
 
 

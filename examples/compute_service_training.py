@@ -103,11 +103,11 @@ def run_compute(ocean, did, consumer_wallet, algorithm_file, pool_address, order
             metadata = json.load(f)
 
     #This rewards the trainer with datatokens of the updated model        
-    asset, pool = publish_asset(metadata, consumer_wallet)
-    data_token = ocean.create_data_token('GPT-Coin '+consumer_wallet.address, 'GPT2A', alice_wallet, blob=ocean.config.metadata_store_url)
-    token_address = data_token.address
+    asset, pool, dt = publish_asset(metadata, consumer_wallet)
+    #data_token = ocean.create_data_token('GPT-Coin '+consumer_wallet.address, 'GPT2A', alice_wallet, blob=ocean.config.metadata_store_url)
+    #token_address = data_token.address
 
-    return job_id, status
+    return job_id, status, token_address
 
 
 def publish_asset(metadata, publisher_wallet):
@@ -118,7 +118,7 @@ def publish_asset(metadata, publisher_wallet):
 
     # create asset DDO and datatoken
     try:
-        asset = ocean.assets.create(metadata, publisher_wallet, [compute_descriptor], dt_name='GPT-2 Pretrained', dt_symbol='GPT-2A')
+        asset = ocean.assets.create(metadata, publisher_wallet, [compute_descriptor], dt_name='GPT-2 Fine-Tuned', dt_symbol='GPT-2-FT')
         print(f'Dataset asset created successfully: did={asset.did}, datatoken={asset.data_token_address}')
         #Test1 Dataset asset created successfully: did=did:op:2cbDb0Aaa1F546829E31267d1a7F74d926Bb5B1B, datatoken=0x2cbDb0Aaa1F546829E31267d1a7F74d926Bb5B1B
         #Test2 Dataset asset created successfully: did=did:op:76D54fF1dE0753c99B788Bf3dAdf51b71bc944C1, datatoken=0x76D54fF1dE0753c99B788Bf3dAdf51b71bc944C1
@@ -146,7 +146,8 @@ def publish_asset(metadata, publisher_wallet):
     dt_cost = ocean.pool.calcInGivenOut(pool.address, ocean.OCEAN_address, asset.data_token_address, 1.0)
     print(f'Asset {asset.did} can now be purchased from pool @{pool.address} '
           f'at the price of {dt_cost} OCEAN tokens.')
-    return asset, pool
+    #return dt for address
+    return asset, pool, dt
 
 
 def main(did, pool_address, order_tx_id=None):
@@ -175,14 +176,14 @@ def main(did, pool_address, order_tx_id=None):
         return
 
     print(f'Requesting compute using asset {asset.did} and pool {pool.address}')
-algo_file = './examples/data/algo_training.py'
-#Update to v0.2 algorithim
-#Script to train GPT-2 on WikiText-2, Publish the updated model, 
-#and reward Consumer with datatokens of new model
-quote = market_ocean.assets.order(asset.did, charlie_wallet.address, service_index=service.index)
-order_tx_id = charlie_ocean.assets.pay_for_service(
-    quote.amount, quote.data_token_address, asset.did, service.index, fee_receiver, charlie_wallet)
-job_id, status = run_compute(ocean, asset.did, consumer, algo_file, pool.address, order_tx_id)
+    algo_file = './examples/data/algo_training.py'
+    #Update to v0.2 algorithim
+    #Script to train GPT-2 on WikiText-2, Publish the updated model, 
+    #and reward Consumer with datatokens of new model
+    quote = market_ocean.assets.order(asset.did, charlie_wallet.address, service_index=service.index)
+    order_tx_id = charlie_ocean.assets.pay_for_service(
+        quote.amount, quote.data_token_address, asset.did, service.index, fee_receiver, charlie_wallet)
+    job_id, status, newasset, newpool, newtoken = run_compute(ocean, asset.did, consumer, algo_file, pool.address, order_tx_id)
     print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')
 
 

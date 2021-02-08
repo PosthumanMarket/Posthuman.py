@@ -35,7 +35,7 @@ tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
 
 training_args = TrainingArguments(
-    output_dir='./results',          # output directory
+    output_dir='./results_train',          # output directory
     num_train_epochs=3,              # total # of training epochs
     per_device_train_batch_size=16,  # batch size per device during training
     per_device_eval_batch_size=64,   # batch size for evaluation
