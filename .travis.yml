@@ -21,8 +21,10 @@ before_install:
   - |
       for i in $(seq 1 50); do
         sleep 5
-        [ -f "${HOME}/.ocean/ocean-contracts/artifacts/ready" ] && break
-      done
+        [ -f "/home/ubuntu/Posthuman.py/contracts
+/artifacts/ready" ] && break
+      done/home/ubuntu/Posthuman.py/contracts
+
       ls -la "${HOME}/.ocean/ocean-contracts/artifacts/"
 
 install: pip install -U tox-travis
