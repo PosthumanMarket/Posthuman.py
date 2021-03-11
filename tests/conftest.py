@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 #  Copyright 2018 Ocean Protocol Foundation
 #  SPDX-License-Identifier: Apache-2.0
 
