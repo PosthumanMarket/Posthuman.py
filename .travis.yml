@@ -21,12 +21,10 @@ before_install:
   - |
       for i in $(seq 1 50); do
         sleep 5
-        [ -f "/home/ubuntu/Posthuman.py/contracts
-/artifacts/ready" ] && break
+        [ -f "/home/ubuntu/Posthuman.py/contracts/artifacts/ready" ] && break
       done/home/ubuntu/Posthuman.py/contracts
 
-      ls -la "/home/ubuntu/Posthuman.py/contracts
-/artifacts/"
+      ls -la "/home/ubuntu/Posthuman.py/contracts/artifacts/"
 
 install: pip install -U tox-travis
 
