@@ -25,7 +25,8 @@ before_install:
 /artifacts/ready" ] && break
       done/home/ubuntu/Posthuman.py/contracts
 
-      ls -la "${HOME}/.ocean/ocean-contracts/artifacts/"
+      ls -la "/home/ubuntu/Posthuman.py/contracts
+/artifacts/"
 
 install: pip install -U tox-travis
 
