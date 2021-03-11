@@ -30,7 +30,8 @@ class ExampleConfig:
         return {
             "eth-network": {
                 "network": "http://localhost:8545",
-                "artifacts.path": "~/.ocean/ocean-contracts/artifacts",
+                "artifacts.path": "/home/ubuntu/Posthuman.py/contracts
+/artifacts",
                 "address.file": ""
             },
             "resources": {

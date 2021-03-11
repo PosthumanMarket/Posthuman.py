@@ -152,7 +152,8 @@ class Config(configparser.ConfigParser):
                         break
 
         if not os.path.exists(path):
-            path = Path('~/.ocean/ocean-contracts/artifacts').expanduser().resolve()
+            path = Path('/home/ubuntu/Posthuman.py/contracts
+/artifacts').expanduser().resolve()
 
         return path
 
