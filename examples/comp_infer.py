@@ -19,6 +19,7 @@ def get_config_dict():
         'resources': {
             'aquarius.url': 'http://127.0.0.1:5000/',
             'provider.url': 'http://127.0.0.1:8030/'  # local provider for GPU access
+
         }
     }
 
@@ -119,7 +120,7 @@ def publish_asset(metadata, publisher_wallet):
     assert receipt and receipt.status == 1, f'datatoken mint failed: tx={txid}, txReceipt={receipt}'
 
     # Create datatoken liquidity pool for the new asset
-    pool = ocean.pool.create(asset.data_token_address, 50, 50, publisher_wallet, 5)
+    pool = ocean.pool.create(asset.data_token_address, 5, 5, publisher_wallet, 5)
     print(f'datatoken liquidity pool was created at address {pool.address}')
 
     # Now the asset can be discovered and consumed
