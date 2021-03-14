@@ -1,6 +1,6 @@
 from transformers import pipeline, set_seed
 import sys
-generator = pipeline('text-generation', model='./new_models')
+generator = pipeline('text-generation', model='gpt2')
 set_seed(42)
 
 #Define inference text to continue in a file. Links also accepted
