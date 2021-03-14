@@ -17,7 +17,8 @@ def get_config_dict():
             'network': 'rinkeby',
         },
         'resources': {
-            'aquarius.url': 'http://127.0.0.1:5000/',
+            #'aquarius.url': 'http://127.0.0.1:5000/',
+            'aquarius.url': 'https://aquarius.rinkeby.v3.dev-ocean.com/',
             'provider.url': 'http://127.0.0.1:8030/',  # local provider for GPU access
             "provider.address": '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260',
             "storage.path": "ocean_lib.db",
