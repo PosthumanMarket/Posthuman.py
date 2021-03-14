@@ -28,3 +28,7 @@ def main():
     result = complete_text(infer_text) # generates continuation text starting at infer text. Text continuation can be adapted to all NLP tasks including classification
     print(result)
     return(result)
+
+result = complete_text(infer_text) # generates continuation text starting at infer text. Text continuation can be adapted to all NLP tasks including classification
+print(result)
+return(result)
