@@ -1,4 +1,32 @@
 
+import os
+
+from ocean_lib.ocean.ocean import Ocean
+from ocean_lib.web3_internal.wallet import Wallet
+from ocean_lib.data_provider.data_service_provider import DataServiceProvider
+from ocean_utils.agreements.service_factory import ServiceDescriptor
+import json
+
+from ocean_utils.agreements.service_types import ServiceTypes
+from ocean_utils.utils.utilities import get_timestamp
+
+from ocean_lib.config import Config
+from ocean_lib.models.algorithm_metadata import AlgorithmMetadata
+from ocean_lib.models.bpool import BPool
+from ocean_lib.models.data_token import DataToken
+from ocean_lib.ocean.ocean import Ocean
+from ocean_lib.web3_internal.wallet import Wallet
+import os
+
+from examples.compute_service import build_compute_descriptor, get_config_dict, run_compute, publish_asset
+#Publish Model with compute to data, with training algorithim
+#Alice's config
+config = {
+   'network' : os.getenv('NETWORK_URL'),
+   'metadataStoreUri' : os.getenv('AQUARIUS_URL'),
+   'providerUri' : os.getenv('PROVIDER_URL'),
+}
+ocean = Ocean(config)
 
 
 token_address = '0x7E227205368243285584a54464fC8A6c2993f5d3'
@@ -15,7 +43,7 @@ data_token = market_ocean.get_data_token(token_address)
 #point to service
 from ocean_utils.agreements.service_types import ServiceTypes
 asset = market_ocean.assets.resolve(did)
-service = asset.get_service(ServiceTypes.CLOUD_COMPUTE) 
+service = asset.get_service(ServiceTypes.CLOUD_COMPUTE)
 
 #point to pool
 pool = market_ocean.pool.get(pool_address)
@@ -26,7 +54,7 @@ price_in_OCEAN = market_ocean.pool.calcInGivenOut(
 print(f"Price of 1 datatoken is {price_in_OCEAN} OCEAN")
 
 market_ocean.pool.buy_data_tokens(
-    pool_address, 
+    pool_address,
     amount=1.0, # buy one data token
     max_OCEAN_amount=price_in_OCEAN+0.1, # with buffer
     from_wallet=bob_wallet
