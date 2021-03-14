@@ -4,7 +4,7 @@ generator = pipeline('text-generation', model='gpt2')
 set_seed(42)
 
 #Define inference text to continue in a file. Links also accepted
-inference_file = Path(os.environ.get("Inference_text_file", ""))
+inference_file = os.environ.get("Inference_text_file", "")
 inference_link = os.environ.get("Inference_Link", "")
 
 
