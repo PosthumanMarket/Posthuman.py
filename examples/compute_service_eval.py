@@ -156,7 +156,7 @@ def main(did, pool_address, order_tx_id=None):
             metadata = json.load(f)
 
         asset, pool = publish_asset(metadata, publisher)
-        
+
     else:
         asset = ocean.assets.resolve(did)
         pool = BPool(pool_address)
@@ -165,7 +165,7 @@ def main(did, pool_address, order_tx_id=None):
         print(f'publish asset failed, cannot continue with running compute.')
         return
 
-    print(f'Requesting compute using asset {asset.did} and pool {pool.address}')
+print(f'Requesting compute using asset {asset.did} and pool {pool.address}')
 algo_file = './examples/data/Algo_evaluation_custom.py'
 #A prompt can be provided to Algo_evaluation as sys.argv[1]
 

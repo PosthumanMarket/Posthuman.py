@@ -148,7 +148,7 @@ def main(did, pool_address, order_tx_id=None):
             metadata = json.load(f)
 
         asset, pool = publish_asset(metadata, publisher)
-        
+
     else:
         asset = ocean.assets.resolve(did)
         pool = BPool(pool_address)
@@ -164,7 +164,7 @@ algo_file = './examples/data/Algo_inference.py'
 #order_tx_id=
 order_tx_id=''
 job_id, status = run_compute(ocean, asset.did, consumer, algo_file, pool.address, order_tx_id)
-    print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')
+print(f'Compute started on asset {asset.did}: job_id={job_id}, status={status}')
 
 
 if __name__ == '__main__':
