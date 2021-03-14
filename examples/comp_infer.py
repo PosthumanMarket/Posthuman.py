@@ -19,7 +19,7 @@ def get_config_dict():
         'resources': {
             'aquarius.url': 'http://127.0.0.1:5000/',
             'provider.url': 'http://127.0.0.1:8030/',  # local provider for GPU access
-            "provider.address": '0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0',
+            "provider.address": '0xe2DD09d719Da89e5a3D0F2549c7E24566e947260',
             "storage.path": "ocean_lib.db",
             "downloads.path": "consume-downloads"
 

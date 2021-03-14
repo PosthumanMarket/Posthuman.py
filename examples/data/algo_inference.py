@@ -29,12 +29,14 @@ def main():
     print(result)
     r2 = {}
     r2['returned_Text'] = str(result)
-    return(r2)
+    r3 = str(r2)
+    return r3
 
 result = complete_text(infer_text) # generates continuation text starting at infer text. Text continuation can be adapted to all NLP tasks including classification
 r2 = {}
 r2['returned_Text'] = str(result)
-print(result)
-return(r2)
+r3 = str(r2)
+print(r3)
+return r3
 
 #return(result)
