@@ -1,5 +1,7 @@
 from transformers import pipeline, set_seed
 import sys
+import os
+
 generator = pipeline('text-generation', model='gpt2')
 set_seed(42)
 
