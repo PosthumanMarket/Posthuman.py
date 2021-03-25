@@ -63,7 +63,7 @@ def run_compute(did, consumer_wallet, algorithm_file, pool_address, order_id=Non
     tx_id = order_id
     if not tx_id:
         tx_id = ocean.assets.pay_for_service(1.0, asset.data_token_address, did, service.index,
-                                             fee_receiver=asset.publisher, from_wallet=consumer_wallet.address)
+                                             fee_receiver=asset.publisher, from_wallet=consumer_wallet)
 
     # load python algorithm to run in the compute job
     with open(algorithm_file) as f:
