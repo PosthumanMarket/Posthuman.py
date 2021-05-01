@@ -1,3 +1,17 @@
+import subprocess
+import sys
+
+i=0
+def install():
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "transformers"])
+    i=2
+
+if i==2:
+  pass
+
+else:
+  install()
+
 import json
 from pathlib import Path
 import os
@@ -30,7 +44,7 @@ if train_link:
 
 if eval_link:
     os.system('wget '+eval_link)
-    
+
 
 # Fine-tune model on a custom dataset : Must be in plaintext format
 
@@ -50,6 +64,3 @@ training_args = TrainingArguments(
 trainer = Trainer(model=model, args=training_args, tokenizer=tokenizer, train_dataset=train_dataset, eval_dataset=eval_dataset)
 trainer.train()
 trainer.evaluate()
-
-
-

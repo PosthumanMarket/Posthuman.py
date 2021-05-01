@@ -1,16 +1,11 @@
 import subprocess
 import sys
 
-i=0
 def install():
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "transformers"])
-    i=2
+    subprocess.check_call([sys.executable, "-m", "pip", "install", transformers])
 
-if i==2:
-  pass
 
-else:
-  install()
+
 
 import json
 from pathlib import Path
@@ -21,27 +16,27 @@ import torch
 from transformers import Trainer
 
 
+
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 from nltk.tokenize import sent_tokenize
 from numpy.random import choice
 import torch
 
 # %% Paths to datasets : can be filepath or links. Note: if links are used, filenames are still required for train & eval data.
-train_dataset = Path(os.environ.get("TRAIN_DATA", ""))
 eval_dataset = Path(os.environ.get("EVAL_DATA", ""))
-train_link = os.environ.get("TRAIN_LINK", "") #only needed if train_data not present locally. Wikitext is available locally
 eval_link = os.environ.get("EVAL_LINK", "") #only needed if eval_data not present locally. Wikitext is available locally
 path_logs = Path(os.environ.get("LOGS", "./data/logs"))
 dids = json.loads(os.environ.get("DIDS", '[]'))
 assert dids, f'no DIDS are defined, cannot continue with the algorithm'
-assert train_dataset, f'no training dataset file defined, cannot continue'
+assert eval_dataset, f'no evaluation dataset file defined, cannot continue'
+
+#Download if links
+
+if eval_link:
+    os.system('wget '+eval_link)
 
 
-
-
-# Trains model further on the wikitext-103 dataset, and then performs evaluation.
-# Useful test-case for federated training of a model, where multiple people invest in
-# collaboratively lowering loss of a model on a useful dataset; and share rewards in the process
+# Evaluate model performance on a custom dataset : Must be in plaintext format
 
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
 model = GPT2LMHeadModel.from_pretrained('gpt2')
@@ -56,6 +51,5 @@ training_args = TrainingArguments(
     logging_dir='./logs',            # directory for storing logs
 )
 
-trainer=Trainer(model=model, args= training_args, tokenizer=tokenizer, train_dataset='wikitext-2/wiki.train.tokens', eval_dataset='wikitext-2/wiki.val.tokens')
-trainer.train()
+trainer = Trainer(model=model, args=training_args, tokenizer=tokenizer, eval_dataset=eval_dataset)
 trainer.evaluate()

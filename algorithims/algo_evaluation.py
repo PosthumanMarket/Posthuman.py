@@ -1,3 +1,17 @@
+import subprocess
+import sys
+
+i=0
+def install():
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "transformers"])
+    i=2
+
+if i==2:
+  pass
+
+else:
+  install()
+
 import json
 from pathlib import Path
 import os
@@ -25,7 +39,7 @@ assert eval_dataset, f'no evaluation dataset file defined, cannot continue'
 
 if eval_link:
     os.system('wget '+eval_link)
-    
+
 
 # Evaluate model performance on a custom dataset : Must be in plaintext format
 
@@ -44,6 +58,3 @@ training_args = TrainingArguments(
 
 trainer = Trainer(model=model, args=training_args, tokenizer=tokenizer, eval_dataset=eval_dataset)
 trainer.evaluate()
-
-
-

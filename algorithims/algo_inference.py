@@ -12,11 +12,6 @@ if i==2:
 else:
   install()
 
-
-
-
-
-
 infer_text="A mummy is a dead human or an animal whose soft tissues and organs have been preserved by either intentional or accidental exposure to chemicals, extreme cold, very low humidity, "
 
 from transformers import pipeline, set_seed
