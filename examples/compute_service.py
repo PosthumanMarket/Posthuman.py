@@ -10,7 +10,7 @@ from ocean_lib.models.data_token import DataToken
 from ocean_lib.ocean.ocean import Ocean
 from ocean_lib.web3_internal.wallet import Wallet
 
-
+"""
 def get_config_dict():
     return {
         'eth-network': {
@@ -18,7 +18,21 @@ def get_config_dict():
         },
         'resources': {
             'aquarius.url': 'https://aquarius.rinkeby.oceanprotocol.com',
-            'provider.url': 'http://127.0.0.1:8030/'  # local provider for GPU access
+            'provider.url': 'https://provider.rinkeby.oceanprotocol.com'  # local provider for GPU access
+        }
+
+
+    }
+"""
+
+def get_config_dict():
+    return {
+        'eth-network': {
+            'network': 'rinkeby',
+        },
+        'resources': {
+            'aquarius.url': 'https://aquarius.rinkeby.v3.dev-ocean.com',
+            'provider.url': 'https://provider.rinkeby.v3.dev-ocean.com'
         }
     }
 
