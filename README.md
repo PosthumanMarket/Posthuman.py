@@ -3,7 +3,7 @@
 
 <h1 align="center">PostHuman.py</h1>
 
-Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v0.2, Users can now train, infer, and evaluate on any arbitary text data. 
+Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v0.3, Users can now train, infer, and evaluate on any arbitary text data - and utilise the Marketplace Frontend to do so.
 
 Posthuman's decentralised architecture achieves three goals that are impossible with centralised AI providers:
 - **Verifiable** Training and Inference: The end user can know for sure which model served a particular inference request
@@ -34,14 +34,14 @@ Furthermore, Posthuman v0.2 now includes a number of tests of the above function
 > Python library to privately & securely publish, exchange, and consume data.
 
 With ocean.py, you can:
-- **Publish** data services: downloadable files or compute-to-data. 
-Ocean creates a new [ERC20](https://github.com/ethereum/EIPs/blob/7f4f0377730f5fc266824084188cc17cf246932e/EIPS/eip-20.md) 
+- **Publish** data services: downloadable files or compute-to-data.
+Ocean creates a new [ERC20](https://github.com/ethereum/EIPs/blob/7f4f0377730f5fc266824084188cc17cf246932e/EIPS/eip-20.md)
 datatoken for each dataset / data service.
 - **Mint** datatokens for the service
 - **Sell** datatokens via an OCEAN-datatoken Balancer pool (for auto price discovery), or for a fixed price
 - **Stake** OCEAN on datatoken pools
 - **Consume** datatokens, to access the service
-- **Transfer** datatokens to another owner, and **all other ERC20 actions** 
+- **Transfer** datatokens to another owner, and **all other ERC20 actions**
 using [web3.py](https://web3py.readthedocs.io/en/stable/examples.html#working-with-an-erc20-token-contract) etc.
 
 ocean.py is part of the [Ocean Protocol](https://www.oceanprotocol.com) toolset.
@@ -69,7 +69,7 @@ This is in beta state and you can expect running into problems. If you run into 
 ### Learn more
 
 - [Get test OCEAN](READMEs/get_test_OCEAN.md) - from rinkeby
-- [Understand config parameters](READMEs/parameters.md) - envvars vs files 
+- [Understand config parameters](READMEs/parameters.md) - envvars vs files
 - [Learn about off-chain services](READMEs/services.md) - Ocean Provider for data services, Aquarius metadata store
 - [Learn about wallets](READMEs/wallets.md) - on generating, storing, and accessing private keys
 - [Get an overview of ocean-lib](READMEs/overview.md) - key modules and functions
