@@ -44,7 +44,7 @@ if eval_link:
 # Evaluate model performance on a custom dataset : Must be in plaintext format
 
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-model = GPT2LMHeadModel.from_pretrained('gpt2')
+model = GPT2LMHeadModel.from_pretrained('distilgpt2-model')
 
 training_args = TrainingArguments(
     output_dir='./results',          # output directory
