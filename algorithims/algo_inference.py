@@ -18,7 +18,12 @@ from transformers import pipeline, set_seed
 import sys
 import os
 
-generator = pipeline('text-generation', model='distilgpt2')
+import zipfile
+path_to_zip_file = "/data/inputs/distilgpt2.zip"
+with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
+    zip_ref.extractall("/data/inputs/distilgpt2")
+
+generator = pipeline('text-generation', model='/data/inputs/distilgpt2')
 set_seed(42)
 
 #Define inference text to continue in a file. Links also accepted
