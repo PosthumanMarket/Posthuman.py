@@ -33,10 +33,8 @@ def get_job_details():
     return job
 
 
-print('Starting compute job with the following input information:')
-print(json.dumps(job_details, sort_keys=True, indent=4))
 
-""" Now, count the lines of the first file in first did """
+
 
 
 i=0
@@ -57,27 +55,19 @@ import sys
 import os
 
 import zipfile
+job_details = get_job_details()
+
+print('Starting compute job with the following input information:')
+print(json.dumps(job_details, sort_keys=True, indent=4))
+
 first_did = job_details['dids'][0]
 filename = job_details['files'][first_did][0]
 path_to_zip_file = filename
 with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
     zip_ref.extractall("/data/outputs/distilgpt2")
 
-generator = pipeline('text-generation', model='/data/inputs/distilgpt2')
+generator = pipeline('text-generation', model='/data/outputs/distilgpt2')
 set_seed(42)
-
-#Define inference text to continue in a file. Links also accepted
-inference_file = os.environ.get("Inference_text_file", "")
-inference_link = os.environ.get("Inference_Link", "")
-
-
-if inference_link:
-    os.system('wget '+inference_link)
-
-#read from inference file
-
-#with open(inference_file) as f:
-    #infer_text = f.read()
 
 
 def complete_text(text):
