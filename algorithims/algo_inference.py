@@ -44,7 +44,7 @@ def install():
     subprocess.check_call([sys.executable, "-m", "pip", "install", "transformers"])
     i=2
 
-if i==2:
+if i==0:
   pass
 
 else:
