@@ -41,7 +41,6 @@ def get_job_details():
 
 i=0
 def install():
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "torch"])
     subprocess.check_call([sys.executable, "-m", "pip", "install", "transformers"])
     i=2
 
