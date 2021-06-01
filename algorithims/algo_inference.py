@@ -66,7 +66,7 @@ first_did = job_details['dids'][0]
 filename = job_details['files'][first_did][0]
 path_to_zip_file = filename
 with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
-    zip_ref.extractall("/data/outputs/distilgpt2")
+    zip_ref.extractall("/data/outputs")
 
 generator = pipeline('text-generation', model='/data/outputs/distilgpt2')
 set_seed(42)
