@@ -3,7 +3,6 @@ import sys
 import json
 import os
 
-from transformers import AutoTokenizer, AutoModelForQuestionAnswering, pipeline
 from utils import get_job_details
 import torch
 
@@ -23,6 +22,7 @@ if i==2:
 else:
   install()
 
+from transformers import AutoTokenizer, AutoModelForQuestionAnswering, pipeline
 import zipfile
 job_details = get_job_details()
 
