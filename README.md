@@ -2,6 +2,7 @@
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
 <h1 align="center">PostHuman.py</h1>
+NOTE: PLEASE SWITCH TO BRANCH V1 for latest commits.
 
 Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v0.2, Users can now train, infer, and evaluate on any arbitary text data. 
 
