@@ -82,6 +82,4 @@ generator = pipeline('question-answering', model='/data/outputs/tinybert3a')
 #set_seed(42)
 
 answers = generator(question=q1, context=text)
-print("Context: "+text)
-print("Question: "+q1)
-print("Answer: "+answers)
+print(answers)
