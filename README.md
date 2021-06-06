@@ -2,7 +2,7 @@
 
 # Posthuman : Ocean Marketplace for Pretrained Transformer Models
 
-please refer to branch **master_new** for latest code and README.
+please refer to branch **v0.3** and v1 for latest code and README.
 
 Posthuman Marketplace is a fork of the ocean marketplace, aimed at the following functionality:
 1. Verifiably Training, Evaluating, and utilising models in Zero-Knowledge using Compute-to-Data
