@@ -10,7 +10,32 @@ Posthuman's decentralised architecture achieves three goals that are impossible 
 - **Zero-Knowledge** training & ownership: The marketplace controls the models, ensuring each person who contributed to training is rewarded fairly, as all value created by these models remains on-chain and cannot be 'leaked'.
 - **Censorship-Resistant** Access : Access to AI is fast becoming a basic necessity for a productive life, however such access can easily be censored by centralised providers. With a decentralised alternative, any holder of crypto is guranteed to be treated equally by the protocol.
 
-Specifically, the workflow for v0.2 is as follows:
+
+In v2 [OCT 2021], we've now introduced two custom-trained, commercially useful models on Ocean Market (Polygon) Mainnet -
+
+Model 1: AI Assistant as a service - A custom  t-gpt2 model trained on conversational data, this model can be used to build and run conversational AI chatbots across fields, AI based games like adventure, etc.
+
+Model 2: Wikipedia QA as a service - A custom t-roberta model pipeline trained on Open-Domain wikipedia question answering. This model can answer any question from the entirety of wikipedia text. This can be used for research across fields, such as medical, historical, academic & scientific research.
+
+## Documentation
+
+Model 1 - Posthuman Conversational AI v1
+
+How to Perform Custom Inference
+Edit the “text” variable in the algorithm. Allow the first two lines to remain as is - they indicate the recommended input format from the paper https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling/tree/master/evaluation & https://arxiv.org/pdf/1911.00536.pdf for AI models that build upon the Dialog-gpt2 pretrained weights/ DSTC7 dataset.
+
+How to fine-tune Posthuman Conversational AI v1 on custom data
+Edit the algo_training algorithm, specifying your dataset and the fine-tuning hyperparameters. Format the training dataset based on the recommended input format from the papers https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling/tree/master/evaluation & https://arxiv.org/pdf/1911.00536.pdf for best results.
+
+
+Codebase updates:
+
+Code upgrades to transformers 4.1 - We’ve updated all our algorithms to be compatible with the latest version of the huggingface transformers library, which includes speed and performance upgrades enabling larger models to be run on the template hardware.
+
+
+
+
+Specifically, the workflow is as follows:
 
 1. Alice publishes a GPT-2 model M1 using PostHuman's compute to data provider, trained on any dataset X. [tests/posthuman-legacy/Alice_flow.py]
 
