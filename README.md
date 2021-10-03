@@ -3,7 +3,7 @@
 
 <h1 align="center">PostHuman.py</h1>
 
-Posthuman Makes available AI-models-as-a-service using web3 technologies of Ocean Protocol. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v1, Users can now train, infer, and evaluate on any arbitary text data - and utilise the Marketplace Frontend to do so. With v2, we've published 2 commercially useful models on Ocean Market (more below).
+Posthuman Makes available AI-models-as-a-service using web3 technologies of Ocean Protocol. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v1 models (POC), Users can train, infer, and evaluate on any arbitary text data -  With v2, we've published 2 commercially useful models on Ocean Market (more below).
 
 Posthuman's decentralised architecture achieves many goals that are impossible with centralised AI providers:
 - **Decentralised Model Ownership**: Model is owned by the community holders of the datatoken - allows anyone to invest in and profit from useful AI models.
