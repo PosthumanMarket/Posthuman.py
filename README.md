@@ -3,7 +3,7 @@
 
 <h1 align="center">PostHuman.py</h1>
 
-Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v0.3, Users can now train, infer, and evaluate on any arbitary text data - and utilise the Marketplace Frontend to do so.
+Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v1, Users can now train, infer, and evaluate on any arbitary text data - and utilise the Marketplace Frontend to do so. With v2, we've published 2 commercially useful models on Ocean Market (more below).
 
 Posthuman's decentralised architecture achieves three goals that are impossible with centralised AI providers:
 - **Verifiable** Training and Inference: The end user can know for sure which model served a particular inference request
