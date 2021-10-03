@@ -5,11 +5,14 @@
 
 Posthuman is a Marketplace based on Ocean protocol that allows users to buy compute services on large NLP models. Model Providers contribute funds to train useful models, and Model Consumers purchase inference and evaluation on the models they find most useful. With Posthuman v1, Users can now train, infer, and evaluate on any arbitary text data - and utilise the Marketplace Frontend to do so. With v2, we've published 2 commercially useful models on Ocean Market (more below).
 
-Posthuman's decentralised architecture achieves three goals that are impossible with centralised AI providers:
-- **Verifiable** Training and Inference: The end user can know for sure which model served a particular inference request
-- **Zero-Knowledge** training & ownership: The marketplace controls the models, ensuring each person who contributed to training is rewarded fairly, as all value created by these models remains on-chain and cannot be 'leaked'.
-- **Censorship-Resistant** Access : Access to AI is fast becoming a basic necessity for a productive life, however such access can easily be censored by centralised providers. With a decentralised alternative, any holder of crypto is guranteed to be treated equally by the protocol.
+Posthuman's decentralised architecture achieves many goals that are impossible with centralised AI providers:
+- **Decentralised Model Ownership**: Model is owned by the community holders of the datatoken - allows anyone to invest in and profit from useful AI models.
+- **Permissionless Development**: Fine-tuning advanced AI models is permissioned on Web2 APIs like OpenAI, and the fine-tuned models are owned by OpenAI and can be unilaterally deleted. In contrast, anyone can fine-tune one of the Posthuman Models on their own data, and the resulting model will also be community-owned.
+- **Censorship-Resistant Access** : Access to AI is fast becoming a basic necessity for a productive life, however such access can easily be censored by centralised providers. With a decentralised alternative, any holder of crypto is guranteed to be treated equally by the protocol.
 
+Additional benefits include-
+- Verifiable Training and Inference: The end user can know for sure which model served a particular inference request
+- Zero-Knowledge fine-tuning: The marketplace controls the models, ensuring each person who contributed to training is rewarded fairly, as all value created by these models remains on-chain and cannot be 'leaked'.
 
 In v2 [OCT 2021], we've now introduced two custom-trained, commercially useful models on Ocean Market (Polygon) Mainnet -
 
@@ -21,10 +24,12 @@ Model 2: Wikipedia QA as a service - A custom t-roberta model pipeline trained o
 
 Model 1 - Posthuman Conversational AI v1
 
-How to Perform Custom Inference
+*How to Perform Custom Inference*
+
 Edit the “text” variable in the algorithm. Allow the first two lines to remain as is - they indicate the recommended input format from the paper https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling/tree/master/evaluation & https://arxiv.org/pdf/1911.00536.pdf for AI models that build upon the Dialog-gpt2 pretrained weights/ DSTC7 dataset.
 
-How to fine-tune Posthuman Conversational AI v1 on custom data
+*How to fine-tune Posthuman Conversational AI v1 on custom data*
+
 Edit the algo_training algorithm, specifying your dataset and the fine-tuning hyperparameters. Format the training dataset based on the recommended input format from the papers https://github.com/mgalley/DSTC7-End-to-End-Conversation-Modeling/tree/master/evaluation & https://arxiv.org/pdf/1911.00536.pdf for best results.
 
 
