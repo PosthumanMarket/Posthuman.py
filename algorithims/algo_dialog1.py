@@ -75,9 +75,6 @@ with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
 
 
 
-# q1 = "How many users had bitcoin wallets in 2017?"
-
-
 from transformers import AutoTokenizer, AutoModelWithLMHead
 
 tokenizer = AutoTokenizer.from_pretrained("/data/outputs/convgpt")
@@ -94,5 +91,5 @@ user_input_ids = tokenizer.encode(input_text + tokenizer.eos_token, return_tenso
 chat_history_ids = model.generate(user_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)
 
     # pretty print last ouput tokens from bot
-print("DialoGPT: {}".format(tokenizer.decode(chat_history_ids[:, user_input_ids.shape[-1]:][0], skip_special_tokens=True)))
+print("Posthuman ConvAI: {}".format(tokenizer.decode(chat_history_ids[:, user_input_ids.shape[-1]:][0], skip_special_tokens=True)))
 #print(Response)
