@@ -47,7 +47,7 @@ import torch
 import subprocess
 import sys
 print('Installing  Transformers lib')
-i=0
+i=2 #skip install
 
 def install():
     subprocess.check_call([sys.executable, "-m", "pip", "install", "transformers"])
